@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table {
+            border-collapse: collapse;
+            width: 600px;
+            border-radius: 50px;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+    <title>Registration</title>
+</head>
+<body>
+<table margin-left="auto" margin-right="auto" text-align="center" class="table" aria-describedby="mydesc">
+    <tr>
+        <th id="value"></th>
+        <td style="background-color: #ffffff; padding: 40px 30px 40px 30px; text-align: center">
+            <h3>Hello <span th:text="${firstName}" th:remove="tag"></span>!</h3>
+            <p>Welcome to Perfume online store.</p>
+            <p>To complete registration please follow the link: </p>
+            <a th:href="@{${registrationUrl}}">confirm registration</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
