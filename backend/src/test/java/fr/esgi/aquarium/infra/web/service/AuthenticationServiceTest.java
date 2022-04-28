@@ -1,17 +1,37 @@
 package fr.esgi.aquarium.infra.web.service;
 
+import static fr.esgi.aquarium.util.TestConstants.FIRST_NAME;
+import static fr.esgi.aquarium.util.TestConstants.LAST_NAME;
+import static fr.esgi.aquarium.util.TestConstants.USER_ACTIVATION_CODE;
+import static fr.esgi.aquarium.util.TestConstants.USER_EMAIL;
+import static fr.esgi.aquarium.util.TestConstants.USER_PASSWORD;
+import static fr.esgi.aquarium.util.TestConstants.USER_PASSWORD_RESET_CODE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import fr.esgi.aquarium.domain.AuthProvider;
 import fr.esgi.aquarium.domain.Role;
 import fr.esgi.aquarium.domain.User;
 import fr.esgi.aquarium.domain.UserRepository;
 import fr.esgi.aquarium.infra.email.MailSender;
 import fr.esgi.aquarium.infra.security.JwtProvider;
-import fr.esgi.aquarium.infra.security.oauth2.*;
+import fr.esgi.aquarium.infra.security.oauth2.FacebookOAuth2UserInfo;
+import fr.esgi.aquarium.infra.security.oauth2.GithubOAuth2UserInfo;
+import fr.esgi.aquarium.infra.security.oauth2.GoogleOAuth2UserInfo;
+import fr.esgi.aquarium.infra.security.oauth2.OAuth2UserFactory;
+import fr.esgi.aquarium.infra.security.oauth2.OAuth2UserInfo;
 import fr.esgi.aquarium.infra.service.AuthenticationService;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,14 +39,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import static fr.esgi.aquarium.util.TestConstants.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

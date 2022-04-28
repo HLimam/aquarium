@@ -25,3 +25,39 @@ create table users
 
 alter table if exists user_role add constraint FKj345gk1bovqvfame88rcx7yyx foreign key (user_id) references users;
 
+CREATE TABLE SPACE_TYPE
+(
+    space_type_id      integer,
+    space_type_libelle varchar(100),
+    PRIMARY KEY (space_type_id)
+);
+
+
+CREATE TABLE SPACE
+(
+    space_id          integer,
+    space_name        varchar(100),
+    space_description text,
+    space_capacity    integer,
+    opening_time time,
+    closing_time time,
+    handicappedAcces  boolean,
+    space_type_id     integer,
+    PRIMARY KEY (space_id),
+    FOREIGN KEY (space_type_id) REFERENCES SPACE_TYPE (space_type_id)
+);
+
+CREATE TABLE MAINTENANCE
+(
+    maintenance_id  integer,
+    date_hour_start timestamp,
+    date_hour_end   timestamp,
+    space_id        integer,
+    manager_id      integer,
+    PRIMARY KEY (maintenance_id),
+    FOREIGN KEY (space_id) REFERENCES SPACE (space_id),
+    FOREIGN KEY (manager_id) REFERENCES users (id)
+);
+
+
+

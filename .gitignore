@@ -52,3 +52,5 @@ yarn-error.log*
 ### VS Code ###
 .vscode/
 /.idea/
+
+.env

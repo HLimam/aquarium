@@ -2,6 +2,7 @@ package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.User;
 import fr.esgi.aquarium.domain.UserRepository;
+import fr.esgi.aquarium.infra.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class SpringDataUserRepository implements UserRepository {
 
     private final JPAUserRepository userRepository;
-    private final UserMapper mapper;
+    private final UserMapper        mapper;
 
 
     @Override
