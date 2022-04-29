@@ -1,12 +1,8 @@
 package fr.esgi.aquarium.infra.service;
 
-import fr.esgi.aquarium.domain.AuthProvider;
-import fr.esgi.aquarium.domain.Role;
 import fr.esgi.aquarium.domain.model.Maintenance;
-import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

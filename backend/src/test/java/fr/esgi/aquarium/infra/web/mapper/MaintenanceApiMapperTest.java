@@ -18,16 +18,16 @@ public class MaintenanceApiMapperTest {
     @Autowired
     private MaintenanceApiMapper maintenanceApiMapper;
 
-    @Test
-    public void convertToResponseDto() {
-        Maintenance maintenance = new Maintenance();
-        maintenance.setSpaceId(1L);
-        maintenance.setManagerId(1L);
-
-        MaintenanceResponse maintenanceResponse = maintenanceApiMapper.convertToResponseDto(maintenance);
-        assertEquals(maintenanceResponse.getSpaceId(), maintenance.getSpaceId());
-        assertEquals(maintenanceResponse.getManagerId(), maintenance.getManagerId());
-    }
+//    @Test
+//    public void convertToResponseDto() {
+//        Maintenance maintenance = new Maintenance();
+//        maintenance.setSpaceId(1L);
+//        maintenance.setManagerId(1L);
+//
+//        MaintenanceResponse maintenanceResponse = maintenanceApiMapper.convertToResponseDto(maintenance);
+//        assertEquals(maintenanceResponse.getSpaceId(), maintenance.getSpaceId());
+//        assertEquals(maintenanceResponse.getManagerId(), maintenance.getManagerId());
+//    }
 
     @Test
     public void findAllMaintenances() {

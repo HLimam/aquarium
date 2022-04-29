@@ -22,7 +22,7 @@ public class MaintenanceApiMapper {
         this.modelMapper = modelMapper;
     }
 
-    public MaintenanceResponse convertToResponseDto(Maintenance maintenance) {
+    private MaintenanceResponse convertToResponseDto(Maintenance maintenance) {
         return modelMapper.map(maintenance, MaintenanceResponse.class);
     }
 
