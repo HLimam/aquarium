@@ -2,10 +2,8 @@ package fr.esgi.aquarium.infra.repository;
 
 import static org.junit.Assert.assertEquals;
 
-import fr.esgi.aquarium.domain.Maintenance;
+import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.infra.repository.model.MaintenanceEntity;
-import fr.esgi.aquarium.infra.web.response.MaintenanceResponse;
-import java.util.List;
 import java.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;

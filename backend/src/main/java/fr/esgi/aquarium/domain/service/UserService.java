@@ -1,8 +1,9 @@
-package fr.esgi.aquarium.domain;
+package fr.esgi.aquarium.domain.service;
 
-import lombok.RequiredArgsConstructor;
-
+import fr.esgi.aquarium.domain.model.User;
+import fr.esgi.aquarium.domain.repository.UserRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class UserService {

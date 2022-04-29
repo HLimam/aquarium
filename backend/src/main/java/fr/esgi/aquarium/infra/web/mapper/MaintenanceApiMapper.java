@@ -1,8 +1,8 @@
 package fr.esgi.aquarium.infra.web.mapper;
 
 
-import fr.esgi.aquarium.domain.Maintenance;
-import fr.esgi.aquarium.domain.MaintenanceService;
+import fr.esgi.aquarium.domain.model.Maintenance;
+import fr.esgi.aquarium.infra.service.MaintenanceService;
 import fr.esgi.aquarium.infra.web.request.MaintenanceRequest;
 import fr.esgi.aquarium.infra.web.response.MaintenanceResponse;
 import java.util.List;
@@ -35,27 +35,27 @@ public class MaintenanceApiMapper {
                                  .collect(Collectors.toList());
     }
 
-//    public MaintenanceResponse findMaintenanceById(Long maintenanceId) {
-//        return convertToResponseDto(maintenanceService.findMaintenanceById(maintenanceId));
-//    }
-//
-//    public MaintenanceResponse findMaintenanceByManagerId(Long managerId) {
-//        return convertToResponseDto(maintenanceService.findMaintenanceByManagerId(email));
-//    }
-//
-//    public MaintenanceResponse findMaintenanceBySpaceId(Long spaceId) {
-//        return convertToResponseDto(maintenanceService.findMaintenanceBySpaceId(email));
-//    }
-//
-//    public MaintenanceResponse closeMaintenanceById(Long maintenanceId) {
-//        return convertToResponseDto(maintenanceService.closeMaintenanceById(maintenanceId));
-//    }
-//
-//    public MaintenanceResponse deleteMaintenanceById(Long maintenanceId) {
-//        return convertToResponseDto(maintenanceService.deleteMaintenanceById(maintenanceId));
-//    }
-//
-//    public MaintenanceResponse createMaintenanceById(MaintenanceRequest maintenanceRequest) {
-//        return convertToResponseDto(maintenanceService.createMaintenanceById(convertToEntity(maintenanceRequest)));
-//    }
+    public MaintenanceResponse findMaintenanceById(Long maintenanceId) {
+        return convertToResponseDto(maintenanceService.findMaintenanceById(maintenanceId));
+    }
+
+    public MaintenanceResponse findMaintenanceByManagerId(Long managerId) {
+        return convertToResponseDto(maintenanceService.findMaintenanceByManagerId(managerId));
+    }
+
+    public MaintenanceResponse findMaintenanceBySpaceId(Long spaceId) {
+        return convertToResponseDto(maintenanceService.findMaintenanceBySpaceId(spaceId));
+    }
+
+    public MaintenanceResponse closeMaintenanceById(Long maintenanceId) {
+        return convertToResponseDto(maintenanceService.closeMaintenanceById(maintenanceId));
+    }
+
+    public void deleteMaintenanceById(Long maintenanceId) {
+        maintenanceService.deleteMaintenanceById(maintenanceId);
+    }
+
+    public MaintenanceResponse createMaintenance(MaintenanceRequest maintenanceRequest) {
+        return convertToResponseDto(maintenanceService.saveMaintenance(convertToEntity(maintenanceRequest)));
+    }
 }

@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JPAMaintenanceRepository extends JpaRepository<MaintenanceEntity,Long> {
-    /*MaintenanceEntity findByEmail(String email);
+    MaintenanceEntity findByManagerId(Long managerId);
 
-    MaintenanceEntity findByPasswordResetCode(String code);
-
-    MaintenanceEntity findByActivationCode(String code);*/
+    MaintenanceEntity findBySpaceId(Long spaceId);
 }

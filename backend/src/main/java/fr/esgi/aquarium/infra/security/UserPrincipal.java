@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.security;
 
 
-import fr.esgi.aquarium.domain.User;
+import fr.esgi.aquarium.domain.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,5 +1,6 @@
-package fr.esgi.aquarium.domain;
+package fr.esgi.aquarium.domain.repository;
 
+import fr.esgi.aquarium.domain.model.User;
 import java.util.List;
 
 public interface UserRepository {

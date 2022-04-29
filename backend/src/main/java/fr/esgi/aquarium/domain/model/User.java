@@ -1,5 +1,7 @@
-package fr.esgi.aquarium.domain;
+package fr.esgi.aquarium.domain.model;
 
+import fr.esgi.aquarium.domain.AuthProvider;
+import fr.esgi.aquarium.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +28,7 @@ public class User {
     private String activationCode;
     private String passwordResetCode;
     private boolean active;
-    private LocalDate date;
+    private LocalDate    date;
     private AuthProvider provider;
-    private Set<Role> roles;
+    private Set<Role>    roles;
 }

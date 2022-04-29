@@ -16,8 +16,8 @@ import static org.mockito.Mockito.when;
 
 import fr.esgi.aquarium.domain.AuthProvider;
 import fr.esgi.aquarium.domain.Role;
-import fr.esgi.aquarium.domain.User;
-import fr.esgi.aquarium.domain.UserRepository;
+import fr.esgi.aquarium.domain.model.User;
+import fr.esgi.aquarium.domain.repository.UserRepository;
 import fr.esgi.aquarium.infra.email.MailSender;
 import fr.esgi.aquarium.infra.security.JwtProvider;
 import fr.esgi.aquarium.infra.security.oauth2.FacebookOAuth2UserInfo;

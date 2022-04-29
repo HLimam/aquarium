@@ -1,8 +1,11 @@
-package fr.esgi.aquarium.domain;
+package fr.esgi.aquarium.infra.web.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+import fr.esgi.aquarium.domain.model.Maintenance;
+import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
+import fr.esgi.aquarium.infra.service.MaintenanceService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

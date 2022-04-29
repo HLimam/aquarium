@@ -2,7 +2,7 @@ package fr.esgi.aquarium.infra.web.mapper;
 
 import static org.junit.Assert.assertEquals;
 
-import fr.esgi.aquarium.domain.Maintenance;
+import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.infra.web.response.MaintenanceResponse;
 import java.util.List;
 import org.junit.Test;

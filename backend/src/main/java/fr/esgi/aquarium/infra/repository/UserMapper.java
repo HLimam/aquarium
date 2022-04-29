@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.repository;
 
-import fr.esgi.aquarium.domain.User;
+import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.infra.repository.model.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

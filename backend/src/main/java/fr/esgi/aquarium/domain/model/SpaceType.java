@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.domain;
+package fr.esgi.aquarium.domain.model;
 
 import java.time.LocalDate;
 import java.util.Set;

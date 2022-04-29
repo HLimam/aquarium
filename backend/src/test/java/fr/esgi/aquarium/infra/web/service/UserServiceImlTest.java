@@ -1,9 +1,9 @@
 package fr.esgi.aquarium.infra.web.service;
 
 import fr.esgi.aquarium.domain.Role;
-import fr.esgi.aquarium.domain.User;
-import fr.esgi.aquarium.domain.UserRepository;
-import fr.esgi.aquarium.domain.UserService;
+import fr.esgi.aquarium.domain.model.User;
+import fr.esgi.aquarium.domain.repository.UserRepository;
+import fr.esgi.aquarium.domain.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

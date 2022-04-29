@@ -1,8 +1,8 @@
 package fr.esgi.aquarium.infra.security.oauth2;
 
 
-import fr.esgi.aquarium.domain.User;
-import fr.esgi.aquarium.domain.UserService;
+import fr.esgi.aquarium.domain.model.User;
+import fr.esgi.aquarium.domain.service.UserService;
 import fr.esgi.aquarium.infra.security.UserPrincipal;
 import fr.esgi.aquarium.infra.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;

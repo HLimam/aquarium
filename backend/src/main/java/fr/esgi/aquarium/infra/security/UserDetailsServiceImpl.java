@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.security;
 
-import fr.esgi.aquarium.domain.User;
-import fr.esgi.aquarium.domain.UserRepository;
+import fr.esgi.aquarium.domain.model.User;
+import fr.esgi.aquarium.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.userdetails.UserDetails;

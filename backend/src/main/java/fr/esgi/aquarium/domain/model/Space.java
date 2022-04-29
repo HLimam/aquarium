@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.domain;
+package fr.esgi.aquarium.domain.model;
 
 import fr.esgi.aquarium.infra.repository.model.SpaceTypeEntity;
 import java.time.LocalDate;

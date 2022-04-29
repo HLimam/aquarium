@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.web.mapper;
 
-import fr.esgi.aquarium.domain.User;
+import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.infra.web.request.RegistrationRequest;
 import fr.esgi.aquarium.infra.web.request.UserRequest;
 import fr.esgi.aquarium.infra.web.response.UserResponse;
