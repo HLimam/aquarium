@@ -30,7 +30,12 @@ public class SpringDataUserRepository implements UserRepository {
 
     @Override
     public User findByEmail(String email) {
-        return mapper.toModel(userRepository.findByEmail(email));
+        var user = userRepository.findByEmail(email);
+        if (user != null) {
+            return mapper.toModel(user);
+        } else {
+            return null;
+        }
     }
 
     @Override
