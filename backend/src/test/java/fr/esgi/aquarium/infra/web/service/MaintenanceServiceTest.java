@@ -35,7 +35,7 @@ public class MaintenanceServiceTest {
         assertEquals(maintenancesResult.size(), maintenances.size());
         assertEquals(maintenancesResult.get(0).getMaintenanceId(), maintenances.get(0).getMaintenanceId());
         assertEquals(maintenancesResult.get(1).getMaintenanceId(), maintenances.get(1).getMaintenanceId());
-        
+
         verify(maintenanceRepository, times(1)).findAllMaintenances();
     }
 
