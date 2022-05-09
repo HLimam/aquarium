@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.web.request;
 
-import fr.esgi.aquarium.domain.Role;
+import fr.esgi.aquarium.domain.enumeration.Role;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

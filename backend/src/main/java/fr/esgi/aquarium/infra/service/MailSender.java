@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.infra.email;
+package fr.esgi.aquarium.infra.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.web.response;
 
-import fr.esgi.aquarium.domain.Role;
+import fr.esgi.aquarium.domain.enumeration.Role;
 import lombok.Data;
 
 import java.util.Set;

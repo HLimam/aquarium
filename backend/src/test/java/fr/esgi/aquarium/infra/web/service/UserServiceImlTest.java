@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.web.service;
 
-import fr.esgi.aquarium.domain.Role;
+import fr.esgi.aquarium.domain.enumeration.Role;
 import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.domain.repository.UserRepository;
 import fr.esgi.aquarium.domain.service.UserService;

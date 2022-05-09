@@ -17,12 +17,14 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
-
+    private static final String BEARER = "Bearer";
+    private static final String EMPTY = "";
     private final JwtProvider jwtProvider;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = jwtProvider.resolveToken((HttpServletRequest) servletRequest);
+        if(token != null) token = token.replace(BEARER,EMPTY).trim();
 
         try {
             if (token != null && jwtProvider.validateToken(token)) {

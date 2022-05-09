@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: "1.0.0"
-  title: "projet-annuel-4"
+  title: "Aquarium"
 servers:
   - url: "http://localhost:8082"
 
@@ -11,183 +11,6 @@ tags:
   - name: "UserController"
 
 paths:
-  /api/v1/admin/add:
-    post:
-      tags:
-        - "AdminController"
-      summary: "Add perfume to database"
-      operationId: "addPerfume"
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                file:
-                  type: string
-                  format: binary
-                perfumeTitle:
-                  type: string
-                perfumer:
-                  type: string
-                year:
-                  type: string
-                country:
-                  type: string
-                perfumeGender:
-                  type: string
-                fragranceTopNotes:
-                  type: string
-                fragranceMiddleNotes:
-                  type: string
-                fragranceBaseNotes:
-                  type: string
-                description:
-                  type: string
-                filename:
-                  type: string
-                price:
-                  type: string
-                volume:
-                  type: string
-                type:
-                  type: string
-              required:
-                - perfumeTitle
-                - perfumer
-                - year
-                - country
-                - perfumeGender
-                - fragranceTopNotes
-                - fragranceMiddleNotes
-                - fragranceBaseNotes
-                - price
-                - volume
-                - type
-      responses:
-        "200":
-          description: "OK"
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/PerfumeResponse"
-              examples:
-                PerfumeResponse:
-                  $ref: "#/components/schemas/PerfumeResponse"
-        "400":
-          description: "Bad request"
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/PerfumeError"
-              examples:
-                PerfumeError:
-                  $ref: "#/components/schemas/PerfumeError"
-      security:
-        - token: []
-
-  /api/v1/admin/edit:
-    put:
-      tags:
-        - "AdminController"
-      summary: "Update perfume"
-      operationId: "updatePerfume"
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                file:
-                  type: string
-                  format: binary
-                perfumeTitle:
-                  type: string
-                perfumer:
-                  type: string
-                year:
-                  type: string
-                country:
-                  type: string
-                perfumeGender:
-                  type: string
-                fragranceTopNotes:
-                  type: string
-                fragranceMiddleNotes:
-                  type: string
-                fragranceBaseNotes:
-                  type: string
-                description:
-                  type: string
-                filename:
-                  type: string
-                price:
-                  type: string
-                volume:
-                  type: string
-                type:
-                  type: string
-              required:
-                - perfumeTitle
-                - perfumer
-                - year
-                - country
-                - perfumeGender
-                - fragranceTopNotes
-                - fragranceMiddleNotes
-                - fragranceBaseNotes
-                - price
-                - volume
-                - type
-      responses:
-        "200":
-          description: "OK"
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/PerfumeResponse"
-              examples:
-                PerfumeResponse:
-                  $ref: "#/components/schemas/PerfumeResponse"
-        "400":
-          description: "Bad request"
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/PerfumeError"
-              examples:
-                PerfumeError:
-                  $ref: "#/components/schemas/PerfumeError"
-      security:
-        - token: []
-
-  /api/v1/admin/delete/{id}:
-    delete:
-      tags:
-        - "AdminController"
-      summary: "Delete perfume"
-      operationId: "deletePerfume"
-      parameters:
-        - name: "id"
-          in: "path"
-          required: true
-          schema:
-            type: "integer"
-            format: "int64"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PerfumeResponse"
-      security:
-        - token: []
-
   /api/v1/admin/user/{id}:
     get:
       tags:
@@ -207,7 +30,7 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserResponse"
       security:
         - token: []
 
@@ -226,7 +49,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: "#/components/schemas/UserResponse"
       security:
         - token: []
 
@@ -323,7 +146,7 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserResponse"
         "400":
           description: "Bad Request"
           content:
@@ -504,7 +327,7 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserResponse"
       security:
         - token: []
 
@@ -547,7 +370,7 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserResponse"
         "400":
           description: "Bad Request"
           content:
@@ -564,62 +387,6 @@ paths:
       security:
         - token: []
 
-  /api/v1/users/edit/password:
-    put:
-      tags:
-        - "UserController"
-      summary: "Change user password"
-      operationId: "updateUserPassword"
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              type: object
-              properties:
-                password:
-                  type: "string"
-                  example: "1234567890"
-                password2:
-                  type: "string"
-                  example: "1234567890"
-              required:
-                - password
-                - password2
-      responses:
-        "200":
-          description: "OK"
-          content:
-            'application/json':
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: string
-                    example: "Password successfully changed!"
-        "400":
-          description: "Bad Request"
-          content:
-            'application/json':
-              schema:
-                type: object
-                properties:
-                  passwordError:
-                    type: "string"
-                  password2Error:
-                    type: "string"
-              examples:
-                BindingResultError:
-                  summary: "Binding Result Errors"
-                  value:
-                    passwordError: "The password must be between 6 and 16 characters long"
-                    password2Error: "The password confirmation must be between 6 and 16 characters long"
-                MatchPasswordError:
-                  summary: "Match Password Error"
-                  value:
-                    data: "Passwords do not match."
-      security:
-        - token: []
-
 components:
   securitySchemes:
     token:
@@ -628,7 +395,7 @@ components:
       in: header
 
   schemas:
-    User:
+    UserResponse:
       type: "object"
       properties:
         id:

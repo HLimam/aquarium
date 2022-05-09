@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.security.oauth2;
 
-import fr.esgi.aquarium.domain.AuthProvider;
+import fr.esgi.aquarium.domain.enumeration.AuthProvider;
 import lombok.SneakyThrows;
 
 import javax.naming.AuthenticationException;

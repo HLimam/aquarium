@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.repository.model;
 
-import fr.esgi.aquarium.domain.AuthProvider;
-import fr.esgi.aquarium.domain.Role;
+import fr.esgi.aquarium.domain.enumeration.AuthProvider;
+import fr.esgi.aquarium.domain.enumeration.Role;
 import lombok.Data;
 
 import javax.persistence.*;
