@@ -14,48 +14,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class MaintenanceApiMapper {
 
-    private final ModelMapper        modelMapper;
-    private final MaintenanceService maintenanceService;
-
-    public MaintenanceApiMapper(@Lazy MaintenanceService maintenanceService, ModelMapper modelMapper) {
-        this.maintenanceService = maintenanceService;
-        this.modelMapper = modelMapper;
+    public static MaintenanceResponse convertToResponseDto(Maintenance maintenance) {
+        return new ModelMapper().map(maintenance, MaintenanceResponse.class);
     }
 
-    private MaintenanceResponse convertToResponseDto(Maintenance maintenance) {
-        return modelMapper.map(maintenance, MaintenanceResponse.class);
+    public static Maintenance convertToModel(MaintenanceRequest maintenanceRequest) {
+        return new ModelMapper().map(maintenanceRequest, Maintenance.class);
     }
 
-    private Maintenance convertToEntity(MaintenanceRequest maintenanceRequest) {
-        return modelMapper.map(maintenanceRequest, Maintenance.class);
-    }
 
-    public List<MaintenanceResponse> findAllMaintenances() {
-        return maintenanceService.findAllMaintenances().stream().map(this::convertToResponseDto)
-                                 .collect(Collectors.toList());
-    }
-
-    public MaintenanceResponse findMaintenanceById(Long maintenanceId) {
-        return convertToResponseDto(maintenanceService.findMaintenanceById(maintenanceId));
-    }
-
-    public MaintenanceResponse findMaintenanceByManagerId(Long managerId) {
-        return convertToResponseDto(maintenanceService.findMaintenanceByManagerId(managerId));
-    }
-
-    public MaintenanceResponse findMaintenanceBySpaceId(Long spaceId) {
-        return convertToResponseDto(maintenanceService.findMaintenanceBySpaceId(spaceId));
-    }
-
-    public MaintenanceResponse closeMaintenanceById(Long maintenanceId) {
-        return convertToResponseDto(maintenanceService.closeMaintenanceById(maintenanceId));
-    }
-
-    public void deleteMaintenanceById(Long maintenanceId) {
-        maintenanceService.deleteMaintenanceById(maintenanceId);
-    }
-
-    public MaintenanceResponse createMaintenance(MaintenanceRequest maintenanceRequest) {
-        return convertToResponseDto(maintenanceService.saveMaintenance(convertToEntity(maintenanceRequest)));
-    }
 }

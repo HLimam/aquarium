@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.infra.web.service;
+package fr.esgi.aquarium.infra.service;
 
 import fr.esgi.aquarium.domain.enumeration.Role;
 import fr.esgi.aquarium.domain.model.User;

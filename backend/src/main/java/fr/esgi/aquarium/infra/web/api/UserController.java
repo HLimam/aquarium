@@ -1,5 +1,6 @@
 package fr.esgi.aquarium.infra.web.api;
 
+import fr.esgi.aquarium.domain.service.UserService;
 import fr.esgi.aquarium.infra.security.UserPrincipal;
 import fr.esgi.aquarium.infra.web.exception.InputFieldException;
 import fr.esgi.aquarium.infra.web.mapper.UserApiMapper;
@@ -18,21 +19,23 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    private final UserApiMapper userApiMapper;
+    private final UserService userService;
 
     @GetMapping("/info")
-    public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserPrincipal user) {
-        return ResponseEntity.ok(userApiMapper.findUserByEmail(user.getEmail()));
+    public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        var user = UserApiMapper.convertToResponseDto(userService.findUserByEmail(userPrincipal.getEmail()));
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/edit")
-    public ResponseEntity<UserResponse> updateUserInfo(@AuthenticationPrincipal UserPrincipal user,
+    public ResponseEntity<UserResponse> updateUserInfo(@AuthenticationPrincipal UserPrincipal userPrincipal,
                                                        @Valid @RequestBody UserRequest request,
                                                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new InputFieldException(bindingResult);
         } else {
-            return ResponseEntity.ok(userApiMapper.updateProfile(user.getEmail(), request));
+            var user = UserApiMapper.convertToResponseDto(userService.updateProfile(userPrincipal.getEmail(), UserApiMapper.convertToModel(request)));
+            return ResponseEntity.ok(user);
         }
     }
 

@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.infra.web.service;
+package fr.esgi.aquarium.infra.service;
 
 import static fr.esgi.aquarium.util.TestConstants.FIRST_NAME;
 import static fr.esgi.aquarium.util.TestConstants.LAST_NAME;
@@ -18,14 +18,13 @@ import fr.esgi.aquarium.domain.enumeration.AuthProvider;
 import fr.esgi.aquarium.domain.enumeration.Role;
 import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.domain.repository.UserRepository;
-import fr.esgi.aquarium.infra.service.MailSender;
 import fr.esgi.aquarium.infra.security.JwtProvider;
 import fr.esgi.aquarium.infra.security.oauth2.FacebookOAuth2UserInfo;
 import fr.esgi.aquarium.infra.security.oauth2.GithubOAuth2UserInfo;
 import fr.esgi.aquarium.infra.security.oauth2.GoogleOAuth2UserInfo;
 import fr.esgi.aquarium.infra.security.oauth2.OAuth2UserFactory;
 import fr.esgi.aquarium.infra.security.oauth2.OAuth2UserInfo;
-import fr.esgi.aquarium.infra.service.AuthenticationService;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

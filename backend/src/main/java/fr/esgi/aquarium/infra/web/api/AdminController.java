@@ -1,5 +1,6 @@
 package fr.esgi.aquarium.infra.web.api;
 
+import fr.esgi.aquarium.domain.service.UserService;
 import fr.esgi.aquarium.infra.web.mapper.UserApiMapper;
 import fr.esgi.aquarium.infra.web.response.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,16 +20,21 @@ import java.util.List;
 @RequestMapping("/api/v1/admin")
 public class AdminController {
 
-    private final UserApiMapper userApiMapper;
+    private final UserService userService;
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable("id") Long userId) {
-        return ResponseEntity.ok(userApiMapper.findUserById(userId));
+        var user = UserApiMapper.convertToResponseDto(userService.findUserById(userId));
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/user/all")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
-        return ResponseEntity.ok(userApiMapper.findAllUsers());
+        var users = userService.findAllUsers()
+                .stream()
+                .map(UserApiMapper::convertToResponseDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(users);
     }
 
 
