@@ -1,8 +1,8 @@
 package fr.esgi.aquarium.infra.web.api;
 
+import fr.esgi.aquarium.domain.exception.InputFieldException;
 import fr.esgi.aquarium.domain.service.UserService;
 import fr.esgi.aquarium.infra.security.UserPrincipal;
-import fr.esgi.aquarium.infra.web.exception.InputFieldException;
 import fr.esgi.aquarium.infra.web.mapper.UserApiMapper;
 import fr.esgi.aquarium.infra.web.request.UserRequest;
 import fr.esgi.aquarium.infra.web.response.UserResponse;

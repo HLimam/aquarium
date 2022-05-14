@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.infra.repository.model;
+package fr.esgi.aquarium.infra.repository.entity;
 
 import fr.esgi.aquarium.domain.enumeration.AuthProvider;
 import fr.esgi.aquarium.domain.enumeration.Role;

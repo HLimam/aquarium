@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.model.User;
-import fr.esgi.aquarium.infra.repository.model.UserEntity;
+import fr.esgi.aquarium.infra.repository.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

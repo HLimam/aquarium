@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
-import fr.esgi.aquarium.infra.repository.model.MaintenanceEntity;
+import fr.esgi.aquarium.infra.repository.entity.MaintenanceEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

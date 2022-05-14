@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.repository;
 
-import fr.esgi.aquarium.infra.repository.model.UserEntity;
+import fr.esgi.aquarium.infra.repository.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
