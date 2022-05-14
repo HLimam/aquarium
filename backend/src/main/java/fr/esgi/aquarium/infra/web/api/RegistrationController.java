@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.web.api;
 
+import fr.esgi.aquarium.domain.exception.InputFieldException;
 import fr.esgi.aquarium.infra.service.AuthenticationService;
-import fr.esgi.aquarium.infra.web.exception.InputFieldException;
 import fr.esgi.aquarium.infra.web.mapper.UserApiMapper;
 import fr.esgi.aquarium.infra.web.request.RegistrationRequest;
 import lombok.RequiredArgsConstructor;

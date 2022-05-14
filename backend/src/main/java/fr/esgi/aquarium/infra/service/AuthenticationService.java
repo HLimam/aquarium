@@ -2,18 +2,14 @@ package fr.esgi.aquarium.infra.service;
 
 import fr.esgi.aquarium.domain.enumeration.AuthProvider;
 import fr.esgi.aquarium.domain.enumeration.Role;
+import fr.esgi.aquarium.domain.exception.*;
 import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.domain.repository.UserRepository;
 import fr.esgi.aquarium.infra.security.JwtProvider;
 import fr.esgi.aquarium.infra.security.oauth2.OAuth2UserInfo;
-import fr.esgi.aquarium.infra.web.exception.ApiRequestException;
-import fr.esgi.aquarium.infra.web.exception.EmailException;
-import fr.esgi.aquarium.infra.web.exception.PasswordConfirmationException;
-import fr.esgi.aquarium.infra.web.exception.PasswordException;
 import fr.esgi.aquarium.infra.web.response.CaptchaResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -59,7 +55,7 @@ public class AuthenticationService {
             response.put("userRole", userRole);
             return response;
         } catch (AuthenticationException e) {
-            throw new ApiRequestException("Incorrect password or email", HttpStatus.FORBIDDEN);
+            throw new BadRequestException(ExceptionCode.UNSUCCESSFUL_LOGIN);
         }
     }
 
@@ -113,7 +109,7 @@ public class AuthenticationService {
         User user = userRepository.findByPasswordResetCode(code);
 
         if (user == null) {
-            throw new ApiRequestException("Password reset code is invalid!", HttpStatus.BAD_REQUEST);
+            throw new BadRequestException(ExceptionCode.UNSUCCESSFUL_LOGIN);
         }
         return user;
     }
@@ -122,7 +118,7 @@ public class AuthenticationService {
         User user = userRepository.findByEmail(email);
 
         if (user == null) {
-            throw new ApiRequestException("Email not found", HttpStatus.BAD_REQUEST);
+            throw new BadRequestException(ExceptionCode.UNSUCCESSFUL_LOGIN);
         }
         user.setPasswordResetCode(UUID.randomUUID().toString());
         userRepository.save(user);
@@ -153,7 +149,7 @@ public class AuthenticationService {
         User user = userRepository.findByActivationCode(code);
 
         if (user == null) {
-            throw new ApiRequestException("Activation code not found.", HttpStatus.NOT_FOUND);
+            throw new BadRequestException(ExceptionCode.ACTIVATION_CODE_ERROR);
         }
         user.setActivationCode(null);
         user.setActive(true);

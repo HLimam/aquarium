@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.infra.web.exception;
+package fr.esgi.aquarium.domain.exception;
 
 import lombok.Getter;
 
