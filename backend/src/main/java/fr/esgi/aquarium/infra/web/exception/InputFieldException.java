@@ -1,4 +1,4 @@
-package fr.esgi.aquarium.domain.exception;
+package fr.esgi.aquarium.infra.web.exception;
 
 import lombok.Getter;
 import org.springframework.validation.BindingResult;
