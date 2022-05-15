@@ -22,9 +22,9 @@ public class MaintenanceController {
 
     @GetMapping
     public ResponseEntity<List<MaintenanceResponse>> getAllMaintenances() {
-        var Maintenances = maintenanceService.findAllMaintenances().stream().map(MaintenanceApiMapper::convertToResponseDto)
+        var maintenances = maintenanceService.findAllMaintenances().stream().map(MaintenanceApiMapper::convertToResponseDto)
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(Maintenances);
+        return ResponseEntity.ok(maintenances);
     }
 
     @GetMapping("/{maintenanceId}")
@@ -34,15 +34,17 @@ public class MaintenanceController {
     }
 
     @GetMapping("/manager/{managerId}")
-    public ResponseEntity<MaintenanceResponse> getMaintenanceByManagerId(@PathVariable("managerId") Long managerId) {
-        var maintenance = MaintenanceApiMapper.convertToResponseDto(maintenanceService.findMaintenanceByManagerId(managerId));
-        return ResponseEntity.ok(maintenance);
+    public ResponseEntity<List<MaintenanceResponse>> getMaintenanceByManagerId(@PathVariable("managerId") Long managerId) {
+        var maintenances = maintenanceService.findMaintenanceByManagerId(managerId).stream().map(MaintenanceApiMapper::convertToResponseDto)
+                                             .collect(Collectors.toList());
+        return ResponseEntity.ok(maintenances);
     }
 
     @GetMapping("/space/{spaceId}")
-    public ResponseEntity<MaintenanceResponse> getMaintenanceBySpaceId(@PathVariable("spaceId") Long spaceId) {
-        var maintenance = MaintenanceApiMapper.convertToResponseDto(maintenanceService.findMaintenanceBySpaceId(spaceId));
-        return ResponseEntity.ok(maintenance);
+    public ResponseEntity<List<MaintenanceResponse>> getMaintenanceBySpaceId(@PathVariable("spaceId") Long spaceId) {
+        var maintenances = maintenanceService.findMaintenanceBySpaceId(spaceId).stream().map(MaintenanceApiMapper::convertToResponseDto)
+                                             .collect(Collectors.toList());
+        return ResponseEntity.ok(maintenances);
     }
 
     @PutMapping("/close/{maintenanceId}")
@@ -59,6 +61,7 @@ public class MaintenanceController {
 
     @PostMapping
     public ResponseEntity<Void> createMaintenance(@RequestBody MaintenanceRequest request) {
+        //TODO empêcher de créer s'il y a déjà une maintenance en cours sur l'espace
         var maintenance = maintenanceService.saveMaintenance(MaintenanceApiMapper.convertToModel(request));
         URI location = URI.create(
                 ServletUriComponentsBuilder.fromCurrentRequest().build().toUri() + "/" + maintenance.getMaintenanceId());

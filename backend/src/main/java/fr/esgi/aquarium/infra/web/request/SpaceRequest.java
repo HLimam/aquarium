@@ -1,26 +1,27 @@
-package fr.esgi.aquarium.domain.model;
+package fr.esgi.aquarium.infra.web.request;
 
 import fr.esgi.aquarium.domain.enumeration.SpaceType;
-import fr.esgi.aquarium.infra.repository.entity.SpaceTypeEntity;
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Space {
-    private Long   id;
+@Builder
+public class SpaceRequest {
+
+    @NotBlank(message = "Fill space name.")
     private String   name;
     private String   description;
     private Integer   capacity;
     private LocalDate openingTime;
     private LocalDate closingTime;
     private Boolean disabledAccess;
-    private SpaceType type;
-    
+    private String type;
+
 }

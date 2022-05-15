@@ -17,12 +17,9 @@ public class SpringDataMaintenanceRepository implements MaintenanceRepository {
     private final MaintenanceMapper        mapper;
 
 
-
     @Override
     public List<Maintenance> findAllMaintenances() {
-        return jpaMaintenanceRepository.findAll().stream()
-                                       .map(mapper::toModel)
-                                       .collect(Collectors.toList());
+        return jpaMaintenanceRepository.findAll().stream().map(mapper::toModel).collect(Collectors.toList());
     }
 
     @Override
@@ -31,13 +28,13 @@ public class SpringDataMaintenanceRepository implements MaintenanceRepository {
     }
 
     @Override
-    public Maintenance findByManagerId(Long managerId) {
-        return mapper.toModel(jpaMaintenanceRepository.findByManagerId(managerId));
+    public List<Maintenance> findByManagerId(Long managerId) {
+        return jpaMaintenanceRepository.findByManagerId(managerId).stream().map(mapper::toModel).collect(Collectors.toList());
     }
 
     @Override
-    public Maintenance findBySpaceId(Long spaceId) {
-        return mapper.toModel(jpaMaintenanceRepository.findBySpaceId(spaceId));
+    public List<Maintenance> findBySpaceId(Long spaceId) {
+        return jpaMaintenanceRepository.findBySpaceId(spaceId).stream().map(mapper::toModel).collect(Collectors.toList());
     }
 
     @Override

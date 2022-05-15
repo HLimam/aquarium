@@ -1,19 +1,17 @@
-package fr.esgi.aquarium.domain.model;
-
-import fr.esgi.aquarium.domain.enumeration.SpaceType;
-import fr.esgi.aquarium.infra.repository.entity.SpaceTypeEntity;
-import java.time.LocalDate;
+package fr.esgi.aquarium.infra.web.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Space {
+@Builder
+public class SpaceResponse {
     private Long   id;
     private String   name;
     private String   description;
@@ -21,6 +19,5 @@ public class Space {
     private LocalDate openingTime;
     private LocalDate closingTime;
     private Boolean disabledAccess;
-    private SpaceType type;
-    
+    private String type;
 }

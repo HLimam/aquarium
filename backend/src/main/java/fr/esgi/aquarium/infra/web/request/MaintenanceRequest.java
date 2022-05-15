@@ -1,13 +1,20 @@
 package fr.esgi.aquarium.infra.web.request;
 
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class MaintenanceRequest {
-    @NotBlank()
+    @NotNull()
+    private String maintenanceId;
+
+    @NotNull()
+    private LocalDateTime dateHourStart;
+
+    @NotNull()
     private Long spaceId;
 
-    @NotBlank()
+    @NotNull()
     private Long managerId;
 }

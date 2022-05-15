@@ -2,7 +2,7 @@ package fr.esgi.aquarium.infra.service;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,17 +21,17 @@ public class MaintenanceService {
         return maintenanceRepository.findById(maintenanceId);
     }
 
-    public Maintenance findMaintenanceByManagerId(Long managerId) {
+    public List<Maintenance> findMaintenanceByManagerId(Long managerId) {
         return maintenanceRepository.findByManagerId(managerId);
     }
 
-    public Maintenance findMaintenanceBySpaceId(Long spaceId) {
+    public List<Maintenance> findMaintenanceBySpaceId(Long spaceId) {
         return maintenanceRepository.findBySpaceId(spaceId);
     }
 
     public Maintenance closeMaintenanceById(Long maintenanceId) {
         Maintenance maintenance = maintenanceRepository.findById(maintenanceId);
-        maintenance.setDateHourStart(LocalDate.now());
+        maintenance.setDateHourEnd(LocalDateTime.now());
         return maintenanceRepository.updateMaintenance(maintenance);
     }
 

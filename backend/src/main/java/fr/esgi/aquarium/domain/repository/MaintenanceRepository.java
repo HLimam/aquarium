@@ -9,9 +9,9 @@ public interface MaintenanceRepository {
 
     Maintenance findById(Long maintenanceId);
 
-    Maintenance findByManagerId(Long managerId);
+    List<Maintenance> findByManagerId(Long managerId);
 
-    Maintenance findBySpaceId(Long spaceId);
+    List<Maintenance> findBySpaceId(Long spaceId);
 
     Maintenance updateMaintenance(Maintenance maintenance);
 

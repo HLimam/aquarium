@@ -1,15 +1,9 @@
 package fr.esgi.aquarium.infra.repository.entity;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import fr.esgi.aquarium.domain.enumeration.SpaceType;
 import lombok.Data;
 
 @Data
@@ -17,18 +11,18 @@ import lombok.Data;
 @Table(name = "space")
 public class SpaceEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "space_type_seq")
-    @SequenceGenerator(name = "space_type_seq", sequenceName = "space_type_seq", initialValue = 1, allocationSize = 1)
-    private Long   spaceId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "space_seq")
+    @SequenceGenerator(name = "space_seq", sequenceName = "space_seq", initialValue = 1, allocationSize = 1)
+    private Long   id;
 
-    @Column(name = "space_name")
-    private String   spaceName;
+    @Column(name = "name")
+    private String   name;
 
     @Column(name = "description")
     private String   description;
 
-    @Column(name = "space_capacity")
-    private Integer   spaceCapacity;
+    @Column(name = "capacity")
+    private Integer   capacity;
 
     @Column(name = "opening_time")
     private LocalDate openingTime;
@@ -36,10 +30,10 @@ public class SpaceEntity {
     @Column(name = "closing_time")
     private LocalDate closingTime;
 
-    @Column(name = "handicappedacces")
-    private Boolean   handicappedAccess;
+    @Column(name = "disabled_access")
+    private Boolean   disabledAccess;
 
-    @ManyToOne()
-    @JoinColumn(name = "space_type_id")
-    private SpaceTypeEntity spaceType;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private SpaceType type;
 }

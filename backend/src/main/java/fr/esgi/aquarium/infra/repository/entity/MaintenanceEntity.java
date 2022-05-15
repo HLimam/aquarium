@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.repository.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +20,10 @@ public class MaintenanceEntity {
     private Long   maintenanceId;
 
     @Column(name = "date_hour_start")
-    private LocalDate   dateHourStart;
+    private LocalDateTime dateHourStart;
 
     @Column(name = "date_hour_end")
-    private LocalDate dateHourEnd;
+    private LocalDateTime dateHourEnd;
 
     @Column(name = "space_id")
     private Long spaceId;
