@@ -7,6 +7,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -34,8 +36,8 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
         return ResourceBundle.getBundle("messages-exceptions").getString(messageCode);
     }
 
-    @ExceptionHandler(value= {EntityAlreadyExistingException.class, BadRequestException.class,
-             DateTimeException.class})
+    @ExceptionHandler(value = {EntityAlreadyExistingException.class, BadRequestException.class,
+            DateTimeException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ExceptionResponse handleFormationFunctionalExceptions(RuntimeException exception) {
@@ -70,7 +72,7 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ExceptionResponse handleMethodArgumentNotValidException (
+    public ExceptionResponse handleMethodArgumentNotValidException(
             MethodArgumentNotValidException exception) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 exception.getClass().getSimpleName(),
@@ -80,7 +82,7 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
         return exceptionResponse;
     }
 
-    @ExceptionHandler({IllegalArgumentException.class,InputFieldException.class})
+    @ExceptionHandler({IllegalArgumentException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ExceptionResponse handleIllegalArgumentException(
@@ -93,7 +95,7 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
         return exceptionResponse;
     }
 
-    @ExceptionHandler(IOException.class)
+    @ExceptionHandler({IOException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ExceptionResponse handleIOException(
@@ -118,7 +120,39 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
         log.error(exceptionResponse.getMessage(), exceptionResponse.getExceptionType());
         return exceptionResponse;
     }
+    @ExceptionHandler(InputFieldException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> handleResponseEntityException(InputFieldException exception) {
+        return ResponseEntity.badRequest().body(exception.getErrorsMap());
+    }
+    @ExceptionHandler(PasswordConfirmationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<PasswordConfirmationException> handlePasswordConfirmationException(PasswordConfirmationException exception) {
+        return ResponseEntity.badRequest().body(new PasswordConfirmationException(exception.getMessage()));
+    }
 
+    @ExceptionHandler(PasswordException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<PasswordException> handlePasswordException(PasswordException exception) {
+        return ResponseEntity.badRequest().body(new PasswordException(exception.getMessage()));
+    }
+
+    @ExceptionHandler(EmailException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<EmailException> handleEmailError(EmailException exception) {
+        return ResponseEntity.badRequest().body(new EmailException(exception.getMessage()));
+    }
+
+    @ExceptionHandler(CaptchaException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<CaptchaException> handleCaptchaException(CaptchaException exception) {
+        return ResponseEntity.badRequest().body(new CaptchaException(exception.getMessage()));
+    }
     /**
      * Méthode permettant de gérer les AccessDenied provoqué par les permissions dans les contrôleurs
      * Définition de la méthode de l'interface AccessDeniedHandler

@@ -1,4 +1,7 @@
-create sequence users_id_seq start 1 increment 1;
+create sequence users_id_seq start 10 increment 1;
+create sequence maintenance_id_seq start 10 increment 1;
+create sequence pass_id_seq start 10 increment 1;
+create sequence space_seq start 10 increment 1;
 create table user_role
 (
     user_id int8 not null,

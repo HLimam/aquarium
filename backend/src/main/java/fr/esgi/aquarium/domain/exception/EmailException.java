@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class EmailException extends RuntimeException {
-    private final String emailError;
+    private final String message;
 
-    public EmailException(String emailError) {
-        this.emailError = emailError;
+    public EmailException(String message) {
+        this.message = message;
     }
 }

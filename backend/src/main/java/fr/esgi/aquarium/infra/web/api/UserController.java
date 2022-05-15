@@ -2,6 +2,7 @@ package fr.esgi.aquarium.infra.web.api;
 
 import fr.esgi.aquarium.domain.service.UserService;
 import fr.esgi.aquarium.infra.security.UserPrincipal;
+import fr.esgi.aquarium.infra.service.SpringUserService;
 import fr.esgi.aquarium.infra.web.exception.InputFieldException;
 import fr.esgi.aquarium.infra.web.mapper.UserApiMapper;
 import fr.esgi.aquarium.infra.web.request.UserRequest;
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    private final UserService userService;
+    private final SpringUserService userService;
 
     @GetMapping("/info")
     public ResponseEntity<UserResponse> getUserInfo(@AuthenticationPrincipal UserPrincipal userPrincipal) {

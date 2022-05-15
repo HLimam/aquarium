@@ -70,6 +70,7 @@ public class UserControllerTest {
         UserRequest userRequest = new UserRequest();
         userRequest.setFirstName(USER2_NAME);
         userRequest.setLastName(USER2_NAME);
+        userRequest.setEmail(USER_EMAIL);
 
         mockMvc.perform(put(URL_USERS_BASIC + "/edit")
                 .content(mapper.writeValueAsString(userRequest))

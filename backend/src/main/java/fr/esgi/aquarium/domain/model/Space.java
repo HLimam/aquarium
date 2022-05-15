@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.domain.model;
 
 import fr.esgi.aquarium.domain.enumeration.SpaceType;
-import fr.esgi.aquarium.infra.repository.entity.SpaceTypeEntity;
+
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;

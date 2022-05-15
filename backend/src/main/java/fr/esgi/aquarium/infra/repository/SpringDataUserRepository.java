@@ -48,7 +48,7 @@ public class SpringDataUserRepository implements UserRepository {
 
     @Override
     public User save(User userFromDb) {
-        if(userRepository.findByEmail(userFromDb.getEmail()) != null){
+        if(userRepository.findByEmail(userFromDb.getEmail()) == null){
             throw new AquariumException(ExceptionCode.ENTITY_CREATION_ERROR);
         }
         return mapper.toModel(userRepository.saveAndFlush(mapper.toEntity(userFromDb)));
@@ -61,6 +61,7 @@ public class SpringDataUserRepository implements UserRepository {
 
     @Override
     public User findByActivationCode(String code) {
-        return mapper.toModel(userRepository.findByActivationCode(code));
+        var user = userRepository.findByActivationCode(code);
+        return user != null ? mapper.toModel(userRepository.findByActivationCode(code)) : null;
     }
 }
