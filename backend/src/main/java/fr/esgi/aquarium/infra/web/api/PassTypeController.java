@@ -2,12 +2,10 @@ package fr.esgi.aquarium.infra.web.api;
 
 
 import fr.esgi.aquarium.domain.service.PassTypeService;
+import fr.esgi.aquarium.infra.service.SpringPassTypeService;
 import fr.esgi.aquarium.infra.web.mapper.PassTypeApiMapper;
-import fr.esgi.aquarium.infra.web.request.PassRequest;
 import fr.esgi.aquarium.infra.web.request.PassTypeRequest;
-import fr.esgi.aquarium.infra.web.request.UpdatePassRequest;
 import fr.esgi.aquarium.infra.web.request.UpdatePassTypeRequest;
-import fr.esgi.aquarium.infra.web.response.PassResponse;
 import fr.esgi.aquarium.infra.web.response.PassTypeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/pass-type")
 public class PassTypeController {
-    private final PassTypeService passTypeService;
+    private final SpringPassTypeService passTypeService;
 
     @GetMapping
     public ResponseEntity<List<PassTypeResponse>> getAllPassTypes(){

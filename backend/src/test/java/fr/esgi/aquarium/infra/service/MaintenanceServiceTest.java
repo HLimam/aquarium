@@ -1,12 +1,13 @@
 package fr.esgi.aquarium.infra.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -29,8 +30,8 @@ public class MaintenanceServiceTest {
     @Test
     public void findAllMaintenances() {
         List<Maintenance> maintenances = new ArrayList<>() {{
-            add(new Maintenance(1L, LocalDate.of(2022, 3, 24), LocalDate.of(2022, 3, 27), 1L, 1L));
-            add(new Maintenance(2L, LocalDate.of(2022, 3, 24), LocalDate.of(2022, 3, 25), 2L, 2L));
+            add(new Maintenance(1L, LocalDateTime.of(2022, 3, 24, 0, 0), LocalDateTime.of(2022, 3, 27, 0, 0), 1L, 1L));
+            add(new Maintenance(2L, LocalDateTime.of(2022, 3, 24, 0, 0), LocalDateTime.of(2022, 3, 25, 0, 0), 2L, 2L));
         }};
 
         when(maintenanceRepository.findAllMaintenances()).thenReturn(maintenances);
