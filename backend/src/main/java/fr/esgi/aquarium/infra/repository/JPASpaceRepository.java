@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.model.Space;
-import fr.esgi.aquarium.infra.repository.entity.PassTypeEntity;
+import fr.esgi.aquarium.infra.repository.entity.PassEntity;
 import fr.esgi.aquarium.infra.repository.entity.SpaceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

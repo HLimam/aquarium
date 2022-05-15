@@ -1,8 +1,8 @@
 package fr.esgi.aquarium.infra.repository;
 
-import fr.esgi.aquarium.domain.model.PassType;
+import fr.esgi.aquarium.domain.model.Pass;
 import fr.esgi.aquarium.domain.model.User;
-import fr.esgi.aquarium.infra.repository.entity.PassTypeEntity;
+import fr.esgi.aquarium.infra.repository.entity.PassEntity;
 import fr.esgi.aquarium.infra.repository.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class PassTypeMapper {
+class PassMapper {
     private final ModelMapper modelMapper;
-    public PassTypeEntity toEntity(PassType passType) {
-        return modelMapper.map(passType,PassTypeEntity.class);
+    public PassEntity toEntity(Pass pass) {
+        return modelMapper.map(pass,PassEntity.class);
     }
 
-    public  PassType toModel(PassTypeEntity entity)  {
-        return modelMapper.map(entity,PassType.class);
+    public  Pass toModel(PassEntity entity)  {
+        return modelMapper.map(entity,Pass.class);
     }
 }
