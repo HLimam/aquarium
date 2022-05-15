@@ -1,7 +1,7 @@
 package fr.esgi.aquarium.domain.model;
 
 import fr.esgi.aquarium.infra.repository.entity.SpaceTypeEntity;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +18,8 @@ public class Space {
     private String   spaceName;
     private String   description;
     private Integer   spaceCapacity;
-    private LocalDate openingTime;
-    private LocalDate closingTime;
+    private LocalDateTime openingTime;
+    private LocalDateTime closingTime;
     private Boolean   handicappedAccess;
     private SpaceTypeEntity spaceType;
     

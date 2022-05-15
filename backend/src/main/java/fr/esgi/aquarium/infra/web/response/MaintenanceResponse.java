@@ -8,8 +8,8 @@ public class MaintenanceResponse {
 
     private Long          maintenanceId;
     private LocalDateTime dateHourStart;
-    private LocalDateTime     dateHourEnd;
-    private Long      spaceId;
-    private Long      managerId;
+    private LocalDateTime dateHourEnd;
+    private Long          spaceId;
+    private Long          managerId;
 
 }

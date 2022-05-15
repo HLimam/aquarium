@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.repository.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,10 +31,10 @@ public class SpaceEntity {
     private Integer   spaceCapacity;
 
     @Column(name = "opening_time")
-    private LocalDate openingTime;
+    private LocalDateTime openingTime;
 
     @Column(name = "closing_time")
-    private LocalDate closingTime;
+    private LocalDateTime closingTime;
 
     @Column(name = "handicappedacces")
     private Boolean   handicappedAccess;
