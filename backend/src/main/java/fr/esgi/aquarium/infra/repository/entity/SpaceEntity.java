@@ -1,9 +1,12 @@
 package fr.esgi.aquarium.infra.repository.entity;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 
 import fr.esgi.aquarium.domain.enumeration.SpaceType;
+import fr.esgi.aquarium.domain.model.Fish;
 import lombok.Data;
 
 @Data
@@ -36,4 +39,7 @@ public class SpaceEntity {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private SpaceType type;
+
+    @ManyToMany
+    private List<FishEntity> fishes;
 }
