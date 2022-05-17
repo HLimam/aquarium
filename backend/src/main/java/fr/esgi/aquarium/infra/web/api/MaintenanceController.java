@@ -1,6 +1,6 @@
 package fr.esgi.aquarium.infra.web.api;
 
-import fr.esgi.aquarium.infra.service.MaintenanceService;
+import fr.esgi.aquarium.domain.service.MaintenanceService;
 import fr.esgi.aquarium.infra.web.mapper.MaintenanceApiMapper;
 import fr.esgi.aquarium.infra.web.request.MaintenanceRequest;
 import fr.esgi.aquarium.infra.web.response.MaintenanceResponse;

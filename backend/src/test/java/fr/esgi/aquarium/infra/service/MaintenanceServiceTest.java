@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
+import fr.esgi.aquarium.domain.service.MaintenanceService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
