@@ -1,6 +1,5 @@
 package fr.esgi.aquarium.infra.web.api;
 
-import fr.esgi.aquarium.domain.service.UserService;
 import fr.esgi.aquarium.infra.security.UserPrincipal;
 import fr.esgi.aquarium.infra.service.SpringUserService;
 import fr.esgi.aquarium.infra.web.exception.InputFieldException;

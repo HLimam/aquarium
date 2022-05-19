@@ -6,6 +6,7 @@ import fr.esgi.aquarium.infra.web.request.MaintenanceRequest;
 import fr.esgi.aquarium.infra.web.response.MaintenanceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/v1/maintenance")
 public class MaintenanceController {
 
