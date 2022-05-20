@@ -56,14 +56,13 @@ public class MaintenanceController {
     }
 
     @DeleteMapping("/{maintenanceId}")
-    public ResponseEntity deleteMaintenanceById(@PathVariable("maintenanceId") Long maintenanceId) {
+    public ResponseEntity<Void> deleteMaintenanceById(@PathVariable("maintenanceId") Long maintenanceId) {
         maintenanceService.deleteMaintenanceById(maintenanceId);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
     public ResponseEntity<Void> createMaintenance(@RequestBody MaintenanceRequest request) {
-        //TODO empêcher de créer s'il y a déjà une maintenance en cours sur l'espace
         var maintenance = maintenanceService.saveMaintenance(MaintenanceApiMapper.convertToModel(request));
         URI location = URI.create(
                 ServletUriComponentsBuilder.fromCurrentRequest().build().toUri() + "/" + maintenance.getMaintenanceId());
