@@ -25,7 +25,7 @@ public class UserService {
         userFromDb.setAddress(user.getAddress());
         userFromDb.setPhoneNumber(user.getPhoneNumber());
         userFromDb.setPostIndex(user.getPostIndex());
-        userFromDb = userRepository.save(userFromDb);
+        userFromDb = userRepository.update(userFromDb);
         return userFromDb;
     }
 

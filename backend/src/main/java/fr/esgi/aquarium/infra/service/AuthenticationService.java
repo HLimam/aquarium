@@ -141,7 +141,7 @@ public class AuthenticationService {
         User user = userRepository.findByEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         user.setPasswordResetCode(null);
-        userRepository.save(user);
+        userRepository.update(user);
         return "Password successfully changed!";
     }
 
@@ -153,7 +153,7 @@ public class AuthenticationService {
         }
         user.setActivationCode(null);
         user.setActive(true);
-        userRepository.save(user);
+        userRepository.update(user);
         return "User successfully activated.";
     }
 }

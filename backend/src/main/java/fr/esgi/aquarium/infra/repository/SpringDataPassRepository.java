@@ -23,11 +23,8 @@ public class SpringDataPassRepository implements PassRepository {
 
     @Override
     public Pass findById(Long typeId) {
-        var Pass = passRepository.findById(typeId);
-        if(Pass.isEmpty()){
-            throw new EntityNotFoundException();
-        }
-        return mapper.toModel(Pass.get());
+        var pass = passRepository.findById(typeId);
+        return pass.isPresent() ? mapper.toModel(pass.get()) : null;
     }
 
     @Override
@@ -37,11 +34,8 @@ public class SpringDataPassRepository implements PassRepository {
 
     @Override
     public Pass findByUser(User user) {
-        var Pass = passRepository.findByUser(user);
-        if(Pass.isEmpty()){
-            throw new EntityNotFoundException();
-        }
-        return mapper.toModel(Pass.get());
+        var pass = passRepository.findByUser(user);
+        return pass.isPresent() ? mapper.toModel(pass.get()) : null;
     }
 
     @Override

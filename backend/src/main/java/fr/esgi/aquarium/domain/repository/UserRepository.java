@@ -11,6 +11,7 @@ public interface UserRepository {
     List<User> findAllByOrderByIdAsc();
 
     User save(User userFromDb);
+    User update(User userFromDb);
 
     User findByPasswordResetCode(String code);
 
