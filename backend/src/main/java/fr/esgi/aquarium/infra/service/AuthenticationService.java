@@ -121,7 +121,7 @@ public class AuthenticationService {
             throw new BadRequestException(ExceptionCode.UNSUCCESSFUL_LOGIN);
         }
         user.setPasswordResetCode(UUID.randomUUID().toString());
-        userRepository.save(user);
+        userRepository.update(user);
         String subject = "Password reset";
         String template = "password-reset-template";
         Map<String, Object> attributes = new HashMap<>();
@@ -141,7 +141,7 @@ public class AuthenticationService {
         User user = userRepository.findByEmail(email);
         user.setPassword(passwordEncoder.encode(password));
         user.setPasswordResetCode(null);
-        userRepository.save(user);
+        userRepository.update(user);
         return "Password successfully changed!";
     }
 
@@ -153,7 +153,7 @@ public class AuthenticationService {
         }
         user.setActivationCode(null);
         user.setActive(true);
-        userRepository.save(user);
+        userRepository.update(user);
         return "User successfully activated.";
     }
 }

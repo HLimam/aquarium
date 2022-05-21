@@ -24,19 +24,13 @@ public class SpringDataUserRepository implements UserRepository {
     @Override
     public User findById(Long userId) {
         var user = userRepository.findById(userId);
-        if(user.isEmpty()){
-            throw new EntityNotFoundException();
-        }
-        return mapper.toModel(user.get());
+        return user.isPresent() ? mapper.toModel(user.get()): null;
     }
 
     @Override
     public User findByEmail(String email) {
         var user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new EntityNotFoundException();
-        }
-        return mapper.toModel(user);
+        return user != null ? mapper.toModel(user) : null;
     }
 
     @Override
@@ -48,6 +42,14 @@ public class SpringDataUserRepository implements UserRepository {
 
     @Override
     public User save(User userFromDb) {
+        if(userRepository.findByEmail(userFromDb.getEmail()) != null){
+            throw new AquariumException(ExceptionCode.ENTITY_CREATION_ERROR);
+        }
+        return mapper.toModel(userRepository.saveAndFlush(mapper.toEntity(userFromDb)));
+    }
+
+    @Override
+    public User update(User userFromDb) {
         if(userRepository.findByEmail(userFromDb.getEmail()) == null){
             throw new AquariumException(ExceptionCode.ENTITY_CREATION_ERROR);
         }

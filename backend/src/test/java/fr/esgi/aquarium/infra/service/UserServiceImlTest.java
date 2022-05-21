@@ -86,12 +86,12 @@ public class UserServiceImlTest {
         user.setFirstName(FIRST_NAME);
 
         when(userRepository.findByEmail(USER_EMAIL)).thenReturn(user);
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.update(user)).thenReturn(user);
         userService.updateProfile(USER_EMAIL, user);
         assertEquals(USER_EMAIL, user.getEmail());
         assertEquals(FIRST_NAME, user.getFirstName());
         verify(userRepository, times(1)).findByEmail(user.getEmail());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).update(user);
     }
 
 }

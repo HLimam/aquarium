@@ -229,7 +229,7 @@ public class AuthenticationServiceTest {
         user.setEmail(USER_EMAIL);
         user.setPasswordResetCode(USER_PASSWORD_RESET_CODE);
 
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.update(user)).thenReturn(user);
         when(userRepository.findByEmail(USER_EMAIL)).thenReturn(user);
         authenticationService.sendPasswordResetCode(USER_EMAIL);
         Map<String, Object> attributes = new HashMap<>();
@@ -238,7 +238,7 @@ public class AuthenticationServiceTest {
 
         assertEquals(USER_EMAIL, user.getEmail());
         assertNotNull(user.getPasswordResetCode());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).update(user);
         verify(userRepository, times(1)).findByEmail(user.getEmail());
         verify(mailSender, times(1))
                 .sendMessageHtml(
@@ -256,13 +256,13 @@ public class AuthenticationServiceTest {
 
         when(userRepository.findByEmail(USER_EMAIL)).thenReturn(user);
         when(passwordEncoder.encode(USER_PASSWORD)).thenReturn(user.getPassword());
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.update(user)).thenReturn(user);
         authenticationService.passwordReset(user.getEmail(), user.getPassword(), user.getPassword());
         assertEquals(USER_EMAIL, user.getEmail());
         assertNotNull(user.getPassword());
         verify(userRepository, times(1)).findByEmail(user.getEmail());
         verify(passwordEncoder, times(1)).encode(user.getPassword());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).update(user);
     }
 
     @Test
@@ -271,10 +271,10 @@ public class AuthenticationServiceTest {
         user.setActivationCode(USER_ACTIVATION_CODE);
 
         when(userRepository.findByActivationCode(USER_ACTIVATION_CODE)).thenReturn(user);
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.update(user)).thenReturn(user);
         String activated = authenticationService.activateUser(user.getActivationCode());
         assertNotNull(activated);
         assertNull(user.getActivationCode());
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(1)).update(user);
     }
 }
