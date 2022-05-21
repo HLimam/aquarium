@@ -121,7 +121,7 @@ public class AuthenticationService {
             throw new BadRequestException(ExceptionCode.UNSUCCESSFUL_LOGIN);
         }
         user.setPasswordResetCode(UUID.randomUUID().toString());
-        userRepository.save(user);
+        userRepository.update(user);
         String subject = "Password reset";
         String template = "password-reset-template";
         Map<String, Object> attributes = new HashMap<>();

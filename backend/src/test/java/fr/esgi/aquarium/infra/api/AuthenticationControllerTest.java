@@ -88,8 +88,8 @@ public class AuthenticationControllerTest {
         mockMvc.perform(post(URL_AUTH_FORGOT)
                 .content(mapper.writeValueAsString(passwordResetRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.message", is("L'entité n'existe pas")));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("L'email et/ou le mot de passe sont incorrects.")));
     }
 
     @Test
