@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "passTpe")
+@Table(name = "passType")
 public class PassTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pass_type_id_seq")
