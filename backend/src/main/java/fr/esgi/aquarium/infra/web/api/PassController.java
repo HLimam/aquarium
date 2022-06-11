@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/pass-type")
+@RequestMapping("/api/v1/pass")
 public class PassController {
     private final SpringPassService passService;
 
@@ -30,19 +30,19 @@ public class PassController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PassResponse> getPassById(@PathVariable("id") Long PassId){
-        var Pass = PassApiMapper.convertToResponseDto(passService.findById(PassId));
+    public ResponseEntity<PassResponse> getPassById(@PathVariable("id") Long passId){
+        var Pass = PassApiMapper.convertToResponseDto(passService.findById(passId));
         return ResponseEntity.ok(Pass);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletePassById(@PathVariable("id") Long PassId){
-        passService.deleteById(PassId);
+    public ResponseEntity deletePassById(@PathVariable("id") Long passId){
+        passService.deleteById(passId);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    public ResponseEntity addPass(@Valid @RequestBody PassRequest Pass) {
+    public ResponseEntity createPass(@Valid @RequestBody PassRequest Pass) {
         var PassResponse = PassApiMapper.convertToResponseDto(passService.save(PassApiMapper.convertToModel(Pass)));
         var location = URI.create(
                 ServletUriComponentsBuilder.fromCurrentRequest().build().toUri() + "/" + PassResponse.getId()
@@ -50,15 +50,9 @@ public class PassController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping
-    public ResponseEntity<PassResponse> updatePass(@Valid @RequestBody UpdatePassRequest Pass) {
-        var PassResponse = PassApiMapper.convertToResponseDto(passService.save(PassApiMapper.convertToModel(Pass)));
-        return ResponseEntity.ok(PassResponse);
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity<PassResponse> updatePassAvailability(@PathVariable Long PassId, @RequestParam(value = "availability") Boolean availability) {
-        var PassResponse = PassApiMapper.convertToResponseDto(passService.updateAvailability(PassId,availability));
+    public ResponseEntity<PassResponse> checkAvailability(@PathVariable Long passId, @RequestParam(value = "availability") Boolean availability) {
+        var PassResponse = PassApiMapper.convertToResponseDto(passService.checkAvailability(passId));
         return ResponseEntity.ok(PassResponse);
     }
 

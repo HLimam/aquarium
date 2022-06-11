@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SpringPassService extends PassService {
-    public SpringPassService(PassRepository passRepository) {
-        super(passRepository);
+    private static final String FILES_PATH = "src/resources/fileToCreate/";
+
+    public SpringPassService(PassRepository passRepository,UserService userService) {
+        super(passRepository,userService);
     }
+
+
 }

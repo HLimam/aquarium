@@ -10,7 +10,7 @@ public interface PassRepository {
 
    void deleteById(Long typeId);
 
-   Pass findByUser(User user);
+   List<Pass> findByUser(User user);
 
    List<Pass> findAll();
 

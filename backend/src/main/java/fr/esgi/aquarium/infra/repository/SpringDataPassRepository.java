@@ -33,9 +33,10 @@ public class SpringDataPassRepository implements PassRepository {
     }
 
     @Override
-    public Pass findByUser(User user) {
-        var pass = passRepository.findByUser(user);
-        return pass.isPresent() ? mapper.toModel(pass.get()) : null;
+    public List<Pass> findByUser(User user) {
+        return passRepository.findByUser(user).stream()
+                .map(mapper::toModel)
+                .collect(Collectors.toList());
     }
 
     @Override

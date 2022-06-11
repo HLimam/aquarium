@@ -11,5 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface JPAPassRepository extends JpaRepository<PassEntity,Long> {
-    Optional<PassEntity> findByUser(User user);
+    List<PassEntity> findByUser(User user);
 }

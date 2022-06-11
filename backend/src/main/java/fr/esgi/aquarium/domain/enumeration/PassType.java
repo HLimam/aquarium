@@ -4,19 +4,20 @@ import java.util.Arrays;
 
 public enum PassType {
 
-    DAILY(1L, "daily",3d),
-    WEEKLY(2L, "weekly",15d),
-    MONTHLY(3L, "monthly",30d),
-    ANNUALLY(4L, "annually",250d);
+    DAILY(1L, "daily", 10d),
+    WEEKLY(2L, "weekly", 15d),
+    MONTHLY(3L, "monthly", 30d),
+    ANNUALLY(4L, "annually", 60d);
 
     private final Long id;
     private final String name;
     private final Double price;
 
-    PassType(final Long id, final String name, Double price) {
+    PassType(final Long id, final String name, final Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
+
     }
 
     public Long getId() {
@@ -26,8 +27,9 @@ public enum PassType {
     public String getName() {
         return name;
     }
-    public Double getPrice() {
-        return price;
+
+    public String getPrice() {
+        return name;
     }
 
     /**

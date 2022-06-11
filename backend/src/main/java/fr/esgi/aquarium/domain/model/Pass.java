@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class Pass {
     private Long Id;
     private User user;
+    private Double price;
     private PassType type;
     private LocalDateTime dateHourPurchase;
     private LocalDateTime dateHourPeremption;
