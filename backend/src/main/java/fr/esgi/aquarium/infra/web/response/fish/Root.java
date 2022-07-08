@@ -4,7 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
-public class Root {
+// import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
+// import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
+/* ObjectMapper om = new ObjectMapper();
+Root[] root = om.readValue(myJsonString, Root[].class); */
+public class Root{
     @JsonProperty("Fishery Management")
     public String fisheryManagement;
     @JsonProperty("Habitat")
@@ -12,11 +16,11 @@ public class Root {
     @JsonProperty("Habitat Impacts")
     public String habitatImpacts;
     @JsonProperty("Image Gallery")
-    public ArrayList<ImageGallery> imageGallery;
+    public Object imageGallery;
     @JsonProperty("Location")
     public String location;
     @JsonProperty("Management")
-    public Object management;
+    public String management;
     @JsonProperty("NOAA Fisheries Region")
     public String nOAAFisheriesRegion;
     @JsonProperty("Population")
@@ -32,7 +36,7 @@ public class Root {
     @JsonProperty("Species Name")
     public String speciesName;
     @JsonProperty("Animal Health")
-    public Object animalHealth;
+    public String animalHealth;
     @JsonProperty("Availability")
     public String availability;
     @JsonProperty("Biology")
@@ -50,23 +54,24 @@ public class Root {
     @JsonProperty("Disease Treatment and Prevention")
     public Object diseaseTreatmentAndPrevention;
     @JsonProperty("Diseases in Salmon")
-    public Object diseasesInSalmon;
+    public String diseasesInSalmon;
     @JsonProperty("Displayed Seafood Profile Illustration")
     public Object displayedSeafoodProfileIllustration;
     @JsonProperty("Ecosystem Services")
-    public Object ecosystemServices;
+    public String ecosystemServices;
     @JsonProperty("Environmental Considerations")
-    public Object environmentalConsiderations;
+    public String environmentalConsiderations;
     @JsonProperty("Environmental Effects")
-    public Object environmentalEffects;
+    public String environmentalEffects;
     @JsonProperty("Farming Methods")
-    public Object farmingMethods;
+    public String farmingMethods;
+
     @JsonProperty("Fat, Total")
     public String fatTotal;
     @JsonProperty("Feeds_")
-    public Object feeds_;
+    public String feeds_;
     @JsonProperty("Feeds")
-    public Object feeds;
+    public String feeds;
     @JsonProperty("Fiber, Total Dietary")
     public String fiberTotalDietary;
     @JsonProperty("Fishing Rate")
@@ -78,13 +83,13 @@ public class Root {
     @JsonProperty("Health Benefits")
     public String healthBenefits;
     @JsonProperty("Human_Health_")
-    public Object human_Health_;
+    public String human_Health_;
     @JsonProperty("Human Health")
-    public Object humanHealth;
+    public String humanHealth;
     @JsonProperty("Physical Description")
     public String physicalDescription;
     @JsonProperty("Production")
-    public Object production;
+    public String production;
     @JsonProperty("Protein")
     public String protein;
     @JsonProperty("Quote")
@@ -115,3 +120,6 @@ public class Root {
     public String path;
     public String last_update;
 }
+
+
+
