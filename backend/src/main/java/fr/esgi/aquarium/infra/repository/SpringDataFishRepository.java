@@ -1,18 +1,6 @@
 package fr.esgi.aquarium.infra.repository;
 
-import fr.esgi.aquarium.domain.exception.AquariumException;
-import fr.esgi.aquarium.domain.exception.EntityNotFoundException;
-import fr.esgi.aquarium.domain.exception.ExceptionCode;
-import fr.esgi.aquarium.domain.model.Fish;
-import fr.esgi.aquarium.domain.model.Space;
-import fr.esgi.aquarium.domain.repository.FishRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
+/*
 @Repository
 @RequiredArgsConstructor
 @Primary
@@ -66,4 +54,4 @@ public class SpringDataFishRepository implements FishRepository {
         }
         return mapper.toModel(fishRepository.saveAndFlush(mapper.toEntity(fish)));
     }
-}
+}*/

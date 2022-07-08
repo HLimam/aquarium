@@ -1,32 +1,17 @@
 package fr.esgi.aquarium.infra.web.api;
 
 
-import fr.esgi.aquarium.domain.model.Fish;
 import fr.esgi.aquarium.infra.service.SpringFishService;
-import fr.esgi.aquarium.infra.web.mapper.FishApiMapper;
-import fr.esgi.aquarium.infra.web.mapper.SpaceApiMapper;
-import fr.esgi.aquarium.infra.web.request.FishRequest;
-import fr.esgi.aquarium.infra.web.request.SpaceRequest;
-import fr.esgi.aquarium.infra.web.request.UpdateSpaceRequest;
-import fr.esgi.aquarium.infra.web.response.FishResponse;
-import fr.esgi.aquarium.infra.web.response.SpaceResponse;
+import fr.esgi.aquarium.infra.web.response.fish.Root;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.Update;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
-import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/fish")
 public class FishController {
     private final SpringFishService springFishService;
-
+/*
     @GetMapping
     public ResponseEntity<List<FishResponse>> getAllFishes(){
         var fishes = springFishService.findAll().stream().map(FishApiMapper::convertToResponseDto).collect(Collectors.toList());
@@ -38,6 +23,25 @@ public class FishController {
         var fishResponse = FishApiMapper.convertToResponseDto(springFishService.findById(SpaceId));
         return ResponseEntity.ok(fishResponse);
     }
+*/
+    @GetMapping("/{name}")
+    public Root[] getFishByName(@PathVariable("name") String name){
+        var fish = springFishService.findByName(name);
+        return fish;
+        //var fishResponse = FishApiMapper.convertToResponseDto(fish);
+        //var fishResponse = FishApiMapper.convertToResponseDto(springFishService.findByName(name));
+        //return ResponseEntity.ok(fishResponse);
+    }
+
+    @GetMapping("/all")
+    public Root[] getAllFishes(){
+        var fish = springFishService.findAll();
+        return fish;
+        //var fishResponse = FishApiMapper.convertToResponseDto(fish);
+        //var fishResponse = FishApiMapper.convertToResponseDto(springFishService.findAll());
+        //return ResponseEntity.ok(fishResponse);
+    }
+/*
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteFishById(@PathVariable("id") Long SpaceId){
@@ -60,5 +64,5 @@ public class FishController {
         return ResponseEntity.ok(fishResponse);
     }
 
-
+*/
 }
