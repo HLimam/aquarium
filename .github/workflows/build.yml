@@ -149,7 +149,7 @@ jobs:
         run: |
           ls -la
           echo ::set-output name=JAR_FIL::${{ needs.package.outputs.jar_version }}
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./backend
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Deploy to Kubernetes cluster
