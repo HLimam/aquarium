@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: backend-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    spec:
+      containers:
+        - name: backend-app
+          image: haithem1993/aquarium:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  key: postgres-username
+                  name: backend-secret
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: postgres-password
+                  name: backend-secret
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: jwt-secret
+                  name: backend-secret
+            - name: MAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: mail-username
+                  name: backend-secret
+            - name: MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mail-password
+                  name: backend-secret
+            - name: GITHUB_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: github-client-id
+                  name: backend-secret
+            - name: GITHUB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: github-client-secret
+                  name: backend-secret
+            - name: RECAPTCHA_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: recaptcha-secret
+                  name: backend-secret
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: database_url
+                  name: backend-config
+            - name: RECAPTCHA_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: recaptcha-url
+                  name: backend-config
+            - name: HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: hostname
+                  name: backend-config
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: server-port
+                  name: backend-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backendone-service
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: backend-app

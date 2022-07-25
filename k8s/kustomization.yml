@@ -1,0 +1,9 @@
+resources:
+  - database\01_secret.yml
+  - database\02_config_map.yml
+  - database\03_persistent_volume.yml
+  - database\04_postgres.yml
+  - backend\01_secret.yml
+  - backend\02_config_map.yml
+  - backend\03_backend.yml
+  - ingress\01_ingress.yml
