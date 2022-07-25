@@ -1,28 +1,31 @@
-#
-# Build stage
-#
-FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /usr/src/app/api/src
-COPY pom.xml /usr/src/app/api
-RUN mvn -f /usr/src/app/api/pom.xml clean install -DskipTests
+#stage 1
+#Start with a base image containing Java runtime
+FROM openjdk:11-slim as build
 
-#
-# Package stage
-#
+# Add Maintainer Info
+LABEL maintainer="HLimam <heithem.limame@gmail.com>"
+
+# The application's jar file
+#ARG JAR_FILE
+
+# Add the application's jar to the container
+COPY target/*.jar app.jar
+
+#unpackage jar file
+RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /app.jar)
+
+#stage 2
+#Same Java runtime
 FROM openjdk:11-slim
-WORKDIR /usr/src/app/api
-COPY --from=build /usr/src/app/api/target/aquarium-0.0.1-SNAPSHOT.jar /usr/src/app/api/aquarium.jar
-ENV SERVER_PORT $SERVER_PORT
-ENV HOSTNAME $HOSTNAME
-ENV JWT_SECRET $JWT_SECRET
-ENV MAIL_USERNAME $MAIL_USERNAME
-ENV MAIL_PASSWORD $MAIL_PASSWORD
-ENV GITHUB_CLIENT_SECRET $GITHUB_CLIENT_SECRET
-ENV GITHUB_CLIENT_ID $GITHUB_CLIENT_ID
-ENV DATABASE_PASSWORD $DATABASE_PASSWORD
-ENV DATABASE_USER $DATABASE_USER
-ENV DATABASE_URL $DATABASE_URL
-ENV RECAPTCHA_URL $RECAPTCHA_URL
-ENV RECAPTCHA_SECRET $RECAPTCHA_SECRET
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","aquarium.jar"]
+
+#Add volume pointing to /tmp
+VOLUME /tmp
+
+#Copy unpackaged application to new container
+ARG DEPENDENCY=/target/dependency
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+
+#execute the application
+ENTRYPOINT ["java","-cp","app:app/lib/*","fr/esgi/aquarium/AquariumApplication"]
