@@ -155,9 +155,10 @@ jobs:
       - name: Deploy to Kubernetes cluster
         uses: kodermax/kubectl-aws-eks@master
         env:
-          RELEASE_IMAGE: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/aquarium:${{ needs.package.outputs.jar_version }}
         with:
           args: set image deployment/backend-app-deployment app=${{ env.RELEASE_IMAGE }} --record
+
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
         with:
