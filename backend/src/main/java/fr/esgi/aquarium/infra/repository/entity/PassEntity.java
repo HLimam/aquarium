@@ -1,7 +1,6 @@
 package fr.esgi.aquarium.infra.repository.entity;
 
 import fr.esgi.aquarium.domain.enumeration.PassType;
-import fr.esgi.aquarium.domain.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

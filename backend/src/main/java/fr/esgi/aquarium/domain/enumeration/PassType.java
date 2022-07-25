@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum PassType {
 
-    DAILY(1L, "daily",3d),
-    WEEKLY(2L, "weekly",15d),
-    MONTHLY(3L, "monthly",30d),
-    ANNUALLY(4L, "annually",250d);
+    DAILY(1L, "daily", 3d),
+    WEEKLY(2L, "weekly", 15d),
+    MONTHLY(3L, "monthly", 30d),
+    ANNUALLY(4L, "annually", 250d);
 
     private final Long id;
     private final String name;
@@ -19,17 +19,6 @@ public enum PassType {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public Double getPrice() {
-        return price;
-    }
-
     /**
      * @return the Enum representation for the given string.
      * @throws IllegalArgumentException if unknown string.
@@ -39,6 +28,18 @@ public enum PassType {
                 .filter(v -> v.name.equals(s))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("unknown value: " + s));
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 
 }

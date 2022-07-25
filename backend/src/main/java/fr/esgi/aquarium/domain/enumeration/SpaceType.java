@@ -1,13 +1,6 @@
 package fr.esgi.aquarium.domain.enumeration;
 
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Set;
-import javax.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 public enum SpaceType {
 
@@ -23,14 +16,6 @@ public enum SpaceType {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     /**
      * @return the Enum representation for the given string.
      * @throws IllegalArgumentException if unknown string.
@@ -40,6 +25,14 @@ public enum SpaceType {
                 .filter(v -> v.name.equals(s))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("unknown value: " + s));
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 @Sql(value = {"/sql/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/sql/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class RegistrationControllerTest {

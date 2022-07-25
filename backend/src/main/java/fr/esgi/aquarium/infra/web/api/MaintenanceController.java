@@ -38,14 +38,14 @@ public class MaintenanceController {
     @GetMapping("/manager/{managerId}")
     public ResponseEntity<List<MaintenanceResponse>> getMaintenanceByManagerId(@PathVariable("managerId") Long managerId) {
         var maintenances = maintenanceService.findMaintenanceByManagerId(managerId).stream().map(MaintenanceApiMapper::convertToResponseDto)
-                                             .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return ResponseEntity.ok(maintenances);
     }
 
     @GetMapping("/space/{spaceId}")
     public ResponseEntity<List<MaintenanceResponse>> getMaintenanceBySpaceId(@PathVariable("spaceId") Long spaceId) {
         var maintenances = maintenanceService.findMaintenanceBySpaceId(spaceId).stream().map(MaintenanceApiMapper::convertToResponseDto)
-                                             .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return ResponseEntity.ok(maintenances);
     }
 

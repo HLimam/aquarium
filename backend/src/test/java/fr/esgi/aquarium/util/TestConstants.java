@@ -1,5 +1,7 @@
 package fr.esgi.aquarium.util;
 
+import fr.esgi.aquarium.domain.enumeration.PassType;
+
 public class TestConstants {
     public static final String URL_ADMIN_BASIC = "/api/v1/admin";
     public static final String URL_ADMIN_ADD = "/api/v1/admin/add";
@@ -13,6 +15,7 @@ public class TestConstants {
     public static final String URL_REGISTRATION_BASIC = "/api/v1/registration";
     public static final String URL_REGISTRATION_ACTIVATE = "/api/v1/registration/activate/{code}";
     public static final String URL_USERS_BASIC = "/api/v1/users";
+    public static final String URL_PASS_BASIC = "/api/v1/pass";
 
     public static final Integer USER_ID = 2;
     public static final String USER_EMAIL = "annual.projects.4th.test@gmail.com";
@@ -34,4 +37,10 @@ public class TestConstants {
     public static final String ROLE_ADMIN = "ADMIN";
     public static final String FIRST_NAME = "John";
     public static final String LAST_NAME = "Doe";
+
+    public static final Integer PASS_ID = 100;
+    public static final String PASS_TYPE = "DAILY";
+    public static final Boolean PASS_AVAILABLE = Boolean.TRUE;
+
+
 }

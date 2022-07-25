@@ -1,7 +1,6 @@
 package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.exception.AquariumException;
-import fr.esgi.aquarium.domain.exception.EntityNotFoundException;
 import fr.esgi.aquarium.domain.exception.ExceptionCode;
 import fr.esgi.aquarium.domain.model.Pass;
 import fr.esgi.aquarium.domain.model.User;
@@ -33,9 +32,9 @@ public class SpringDataPassRepository implements PassRepository {
     }
 
     @Override
-    public Pass findByUser(User user) {
-        var pass = passRepository.findByUser(user);
-        return pass.isPresent() ? mapper.toModel(pass.get()) : null;
+    public List<Pass> findByUser(User user) {
+        var passList = passRepository.findByUser(user);
+        return passList.stream().map(mapper::toModel).collect(Collectors.toList());
     }
 
     @Override
@@ -46,15 +45,15 @@ public class SpringDataPassRepository implements PassRepository {
     }
 
     @Override
-    public Pass save(Pass Pass) {
-        return mapper.toModel(passRepository.saveAndFlush(mapper.toEntity(Pass)));
+    public Pass save(Pass pass) {
+        return mapper.toModel(passRepository.saveAndFlush(mapper.toEntity(pass)));
     }
 
     @Override
-    public Pass update(Pass Pass) {
-        if(passRepository.findById(Pass.getId()).isEmpty()){
+    public Pass update(Pass pass) {
+        if (passRepository.findById(pass.getId()).isEmpty()) {
             throw new AquariumException(ExceptionCode.MODIFICATION_IMPOSSIBLE);
         }
-        return mapper.toModel(passRepository.saveAndFlush(mapper.toEntity(Pass)));
+        return mapper.toModel(passRepository.saveAndFlush(mapper.toEntity(pass)));
     }
 }

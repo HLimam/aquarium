@@ -6,15 +6,15 @@ import fr.esgi.aquarium.domain.model.User;
 import java.util.List;
 
 public interface PassRepository {
-   Pass findById(Long typeId);
+    Pass findById(Long typeId);
 
-   void deleteById(Long typeId);
+    void deleteById(Long typeId);
 
-   Pass findByUser(User user);
+    List<Pass> findByUser(User user);
 
-   List<Pass> findAll();
+    List<Pass> findAll();
 
-   Pass save(Pass Pass);
+    Pass save(Pass Pass);
 
-   Pass update(Pass Pass);
+    Pass update(Pass Pass);
 }

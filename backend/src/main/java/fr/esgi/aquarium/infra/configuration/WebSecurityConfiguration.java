@@ -29,7 +29,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final OAuth2SuccessHandler oauthSuccessHandler;
     private final CustomOAuth2UserService oAuth2UserService;
 
-    public WebSecurityConfiguration(JwtConfigurer jwtConfigurer, @Lazy OAuth2SuccessHandler oauthSuccessHandler,@Lazy CustomOAuth2UserService oAuth2UserService) {
+    public WebSecurityConfiguration(JwtConfigurer jwtConfigurer, @Lazy OAuth2SuccessHandler oauthSuccessHandler, @Lazy CustomOAuth2UserService oAuth2UserService) {
         this.jwtConfigurer = jwtConfigurer;
         this.oauthSuccessHandler = oauthSuccessHandler;
         this.oAuth2UserService = oAuth2UserService;
@@ -60,6 +60,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(jwtConfigurer);
     }
+
     /**
      * Configuration principale du coeur d'application
      */
@@ -82,6 +83,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/api/**", configuration);
         return source;
     }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

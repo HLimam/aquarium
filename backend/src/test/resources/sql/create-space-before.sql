@@ -1,4 +1,3 @@
-insert into space_type values (100, 'Grand Bassin');
 
-insert into space (space_id, opening_time, closing_time, space_type_id, id, capacity, description, disabled_access, name)
-values (100, '10:00', '18:00', 100, 1, 150, 'Observez les specimens de méditerannée', true, 'Méditerannée');
+insert into space (id, opening_time, closing_time, type, capacity, description, disabled_access, name)
+values (1, '2022-07-20','2022-07-21','AGENCE', 150, 'Observez les specimens de méditerannée', true, 'Méditerannée');

@@ -120,12 +120,14 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
         log.error(exceptionResponse.getMessage(), exceptionResponse.getExceptionType());
         return exceptionResponse;
     }
+
     @ExceptionHandler(InputFieldException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ResponseEntity<Map<String, String>> handleResponseEntityException(InputFieldException exception) {
         return ResponseEntity.badRequest().body(exception.getErrorsMap());
     }
+
     @ExceptionHandler(PasswordConfirmationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -153,6 +155,7 @@ public class GlobalControllerExceptionHandler implements AccessDeniedHandler {
     public ResponseEntity<CaptchaException> handleCaptchaException(CaptchaException exception) {
         return ResponseEntity.badRequest().body(new CaptchaException(exception.getMessage()));
     }
+
     /**
      * Méthode permettant de gérer les AccessDenied provoqué par les permissions dans les contrôleurs
      * Définition de la méthode de l'interface AccessDeniedHandler

@@ -1,6 +1,5 @@
 package fr.esgi.aquarium.infra.web.request;
 
-import fr.esgi.aquarium.domain.enumeration.SpaceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +15,9 @@ import java.time.LocalDate;
 public class SpaceRequest {
 
     @NotBlank(message = "Fill space name.")
-    private String   name;
-    private String   description;
-    private Integer   capacity;
+    private String name;
+    private String description;
+    private Integer capacity;
     private LocalDate openingTime;
     private LocalDate closingTime;
     private Boolean disabledAccess;

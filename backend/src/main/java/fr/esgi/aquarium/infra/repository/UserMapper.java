@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class UserMapper {
     private final ModelMapper modelMapper;
-    public  UserEntity toEntity(User user) {
-        return modelMapper.map(user,UserEntity.class);
+
+    public UserEntity toEntity(User user) {
+        return modelMapper.map(user, UserEntity.class);
     }
 
-    public  User toModel(UserEntity entity)  {
-        return modelMapper.map(entity,User.class);
+    public User toModel(UserEntity entity) {
+        return modelMapper.map(entity, User.class);
     }
 }

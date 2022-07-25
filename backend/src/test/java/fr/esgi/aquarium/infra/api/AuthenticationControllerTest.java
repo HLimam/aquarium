@@ -1,7 +1,6 @@
 package fr.esgi.aquarium.infra.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.esgi.aquarium.domain.exception.ExceptionCode;
 import fr.esgi.aquarium.infra.web.request.AuthenticationRequest;
 import fr.esgi.aquarium.infra.web.request.PasswordResetRequest;
 import org.junit.Before;
@@ -26,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 @Sql(value = {"/sql/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/sql/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class AuthenticationControllerTest {

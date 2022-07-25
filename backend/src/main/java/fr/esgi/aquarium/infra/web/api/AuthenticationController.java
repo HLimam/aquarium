@@ -48,7 +48,7 @@ public class AuthenticationController {
 
     @PostMapping("/reset")
     public ResponseEntity<String> passwordReset(@RequestBody PasswordResetRequest passwordReset) {
-        return ResponseEntity.ok(authenticationService.passwordReset(passwordReset.getEmail(),passwordReset.getPassword(),passwordReset.getPassword2()));
+        return ResponseEntity.ok(authenticationService.passwordReset(passwordReset.getEmail(), passwordReset.getPassword(), passwordReset.getPassword2()));
     }
 
     @PutMapping("/edit/password")

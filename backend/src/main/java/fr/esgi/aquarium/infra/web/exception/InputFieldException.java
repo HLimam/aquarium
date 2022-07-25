@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 @Getter
 public class InputFieldException extends RuntimeException {
+    final transient Collector<FieldError, ?, Map<String, String>> collector = Collectors.toMap(
+            fieldError -> fieldError.getField() + "Error",
+            FieldError::getDefaultMessage
+    );
     private final transient BindingResult bindingResult;
     private final Map<String, String> errorsMap;
 
@@ -17,9 +21,4 @@ public class InputFieldException extends RuntimeException {
         this.bindingResult = bindingResult;
         this.errorsMap = bindingResult.getFieldErrors().stream().collect(collector);
     }
-
-    final transient Collector<FieldError, ?, Map<String, String>> collector = Collectors.toMap(
-            fieldError -> fieldError.getField() + "Error",
-            FieldError::getDefaultMessage
-    );
 }

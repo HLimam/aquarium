@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-    @Lazy private final AuthenticationService authenticationService;
+    @Lazy
+    private final AuthenticationService authenticationService;
     private final UserService userService;
 
     @Override

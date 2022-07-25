@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @WithUserDetails(ADMIN_EMAIL)
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 @Sql(value = {"/sql/create-user-before.sql"},
         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/sql/create-user-after.sql"},

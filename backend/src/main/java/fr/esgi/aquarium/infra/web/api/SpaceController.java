@@ -23,19 +23,19 @@ public class SpaceController {
     private final SpringSpaceService SpaceService;
 
     @GetMapping
-    public ResponseEntity<List<SpaceResponse>> getAllSpaces(){
+    public ResponseEntity<List<SpaceResponse>> getAllSpaces() {
         var spaces = SpaceService.findAll().stream().map(SpaceApiMapper::convertToResponseDto).collect(Collectors.toList());
         return ResponseEntity.ok(spaces);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SpaceResponse> getSpaceById(@PathVariable("id") Long SpaceId){
+    public ResponseEntity<SpaceResponse> getSpaceById(@PathVariable("id") Long SpaceId) {
         var spaceResponse = SpaceApiMapper.convertToResponseDto(SpaceService.findById(SpaceId));
         return ResponseEntity.ok(spaceResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteSpaceById(@PathVariable("id") Long SpaceId){
+    public ResponseEntity deleteSpaceById(@PathVariable("id") Long SpaceId) {
         SpaceService.deleteById(SpaceId);
         return ResponseEntity.noContent().build();
     }

@@ -2,9 +2,10 @@ package fr.esgi.aquarium.domain.service;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
+import lombok.RequiredArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MaintenanceService {
