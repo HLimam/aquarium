@@ -117,7 +117,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: jar-artifact
-          path: ${{ github.workspace }}/target/*.jar
+          path: ${{ github.workspace }}/backend/target/*.jar
           retention-days: 1
   deploy:
     runs-on: ubuntu-latest
