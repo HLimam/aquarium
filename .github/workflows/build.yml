@@ -107,11 +107,11 @@ jobs:
           parts=( ${old//./ } )
           bv=$((parts[2] + 1))
           NEW_VERSION="latest"
-          echo "pom.xml at" ./ "will be bumped from" $OLD_VERSION "to" $NEW_VERSION
-          mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file ./pom.xml
+          echo "pom.xml at" ./backend/ "will be bumped from" $OLD_VERSION "to" $NEW_VERSION
+          mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file ./backend/pom.xml
           echo ::set-output name=jar_version::${NEW_VERSION}
       - name: Build a package
-        run: mvn -B package --file .backend/pom.xml -DskipTests
+        run: mvn -B package --file ./backend/pom.xml -DskipTests
 
       - name: Temporarily save jar artifact
         uses: actions/upload-artifact@v2
@@ -151,3 +151,14 @@ jobs:
           echo ::set-output name=JAR_FIL::${{ needs.package.outputs.jar_version }}
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Deploy to Kubernetes cluster
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          RELEASE_IMAGE: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        with:
+          args: set image deployment/backend-app-deployment app=${{ env.RELEASE_IMAGE }} --record
+      - name: Verify Kubernetes deployment
+        uses: kodermax/kubectl-aws-eks@master
+        with:
+          args: rollout status deploy backend-app-deployment
