@@ -129,7 +129,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: jar-artifact
-          path: target/
+          path: backend/target/
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
