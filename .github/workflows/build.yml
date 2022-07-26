@@ -1,77 +1,91 @@
-name: Aquaruim project CI 
-
-on:
+name: Aquaruim project CI
+'on':
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
-    types: [opened, synchronize, reopened]
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: aquarium
-          IMAGE_TAG: ${{ needs.package.outputs.jar_version }}
-          IMAGE_NAME_TAG: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          APPLICATION_MANIFEST: '/k8s/backend/03_backend.yml'
-          APPLICATION_DOCKERFILE: '/backend/Dockerfile'
-          CLUSTER_NAME: 'aquarium-cluster'
-          APPLICATION_ARTIFACT: '/backend/target/jar-artifact.jar'
+  ECR_REGISTRY: '${{ steps.login-ecr.outputs.registry }}'
+  ECR_REPOSITORY: aquarium
+  IMAGE_TAG: '${{ needs.package.outputs.jar_version }}'
+  IMAGE_NAME_TAG: '$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG'
+  APPLICATION_MANIFEST: /k8s/backend/03_backend.yml
+  APPLICATION_DOCKERFILE: /backend/Dockerfile
+  CLUSTER_NAME: aquarium-cluster
+  APPLICATION_ARTIFACT: /backend/target/jar-artifact.jar
 jobs:
-          
- package:
+  package:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     outputs:
-      jar_version: ${{ steps.bump.outputs.jar_version }}
-
+      jar_version: '${{ steps.bump.outputs.jar_version }}'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-          distribution: 'adopt'
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
+          distribution: adopt
+          server-id: github
+          settings-path: '${{ github.workspace }}'
       - name: Bump jar version
         id: bump
-        run: |
-          OLD_VERSION=$(cd ./ && mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        run: >
+          OLD_VERSION=$(cd ./ && mvn help:evaluate -Dexpression=project.version
+          -q -DforceStdout)
+
           echo "$OLD_VERSION"
+
           echo ::set-output ${OLD_VERSION}
+
           BUMP_MODE="none"
+
           old="$OLD_VERSION"
+
           parts=( ${old//./ } )
+
           bv=$((parts[2] + 1))
+
           NEW_VERSION="latest"
-          echo "pom.xml at" ./backend/ "will be bumped from" $OLD_VERSION "to" $NEW_VERSION
-          mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file ./backend/pom.xml
+
+          echo "pom.xml at" ./backend/ "will be bumped from" $OLD_VERSION "to"
+          $NEW_VERSION
+
+          mvn -q versions:set -DnewVersion="${NEW_VERSION}" --file
+          ./backend/pom.xml
+
           echo ::set-output name=jar_version::${NEW_VERSION}
       - name: Build a package
         run: mvn -B package --file ./backend/pom.xml -DskipTests
-
       - name: Temporarily save jar artifact
         uses: actions/upload-artifact@v2
         with:
           name: jar-artifact
-          path: ${{ github.workspace }}/backend/target/*.jar
+          path: '${{ github.workspace }}/backend/target/*.jar'
           retention-days: 1
-          
- build-and-deploy:
-    needs: [package]
+  build-and-deploy:
+    needs:
+      - package
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Contrast Security Amazon EKS Build-Deploy
-      uses: Contrast-Security-OSS/integration-eks-github-action@main
-      id: contrast-build-deploy
-      with:
-        application-manifest: ${{ env.APPLICATION_MANIFEST }}
-        application-dockerfile: ${{ env.APPLICATION_DOCKERFILE }}
-        application-output-image-name-tag: ${{ env.IMAGE_NAME_TAG }}
-        cluster-name: ${{ env.CLUSTER_NAME }}
-        contrast-security-credentials-file: ${{ secrets.CONTRAST_CREDS_FILE }}
-        aws-credentials-file: ${{ secrets.AWS_CREDS_FILE }}
-        application-artifact: ${{ env.APPLICATION_ARTIFACT }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Contrast Security Amazon EKS Build-Deploy
+        uses: Contrast-Security-OSS/integration-eks-github-action@main
+        id: contrast-build-deploy
+        with:
+          application-manifest: '${{ env.APPLICATION_MANIFEST }}'
+          application-dockerfile: '${{ env.APPLICATION_DOCKERFILE }}'
+          application-output-image-name-tag: '${{ env.IMAGE_NAME_TAG }}'
+          cluster-name: '${{ env.CLUSTER_NAME }}'
+          contrast-security-credentials-file: '${{ secrets.CONTRAST_CREDS_FILE }}'
+          aws-credentials-file: '${{ secrets.AWS_CREDS_FILE }}'
+          application-artifact: '${{ env.APPLICATION_ARTIFACT }}'
