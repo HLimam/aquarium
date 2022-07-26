@@ -89,7 +89,7 @@ jobs:
           ECR_REPOSITORY: aquarium
           IMAGE_TAG: 'latest'
         with:
-          args: set image deployment/backend-app-deployment backend-app-deployment=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          args: set image deployment/backend-app-deployment backend-app-deployment=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  --record
         
       - name: verify deployment
         uses: kodermax/kubectl-aws-eks@master
