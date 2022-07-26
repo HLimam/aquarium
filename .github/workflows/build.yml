@@ -89,11 +89,11 @@ jobs:
           ECR_REPOSITORY: aquarium
           IMAGE_TAG: 'latest'
         with:
-          args: set image deployment/backend-app-deployment backend-app-deployment=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  --record
+          args: set image deployment/$ECR_REPOSITORY $ECR_REPOSITORY=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
       - name: verify deployment
         uses: kodermax/kubectl-aws-eks@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: rollout status deployment/backend-app-deployment
+          args: rollout status deployment/aquarium
