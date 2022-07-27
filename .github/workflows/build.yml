@@ -85,6 +85,7 @@ jobs:
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: aquarium
           IMAGE_TAG: 'latest'
@@ -95,5 +96,6 @@ jobs:
         uses: kodermax/kubectl-aws-eks@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: rollout status deployment/aquarium
