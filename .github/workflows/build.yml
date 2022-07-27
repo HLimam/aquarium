@@ -82,7 +82,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: deploy to cluster
-        uses: actions-hub/kubectl@masterr
+        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_STAGING }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
