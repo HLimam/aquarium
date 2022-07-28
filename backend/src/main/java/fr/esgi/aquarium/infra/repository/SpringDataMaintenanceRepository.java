@@ -2,11 +2,12 @@ package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public class SpringDataMaintenanceRepository implements MaintenanceRepository {
 
     private final JPAMaintenanceRepository jpaMaintenanceRepository;
-    private final MaintenanceMapper        mapper;
+    private final MaintenanceMapper mapper;
 
 
     @Override

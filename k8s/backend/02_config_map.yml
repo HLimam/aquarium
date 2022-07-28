@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  database_url: "postgres-service:5432/aquarium?createDatabaseIfNotExist=true"
+  recaptcha-url: "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s"
+  hostname: "backendone-service:8080"
+  server-port: "8080"

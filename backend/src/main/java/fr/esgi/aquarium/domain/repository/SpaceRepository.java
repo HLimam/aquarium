@@ -5,15 +5,15 @@ import fr.esgi.aquarium.domain.model.Space;
 import java.util.List;
 
 public interface SpaceRepository {
-   Space findById(Long d);
+    Space findById(Long d);
 
-   void deleteById(Long d);
+    void deleteById(Long d);
 
-   Space findByName(String name);
+    Space findByName(String name);
 
-   List<Space> findAll();
+    List<Space> findAll();
 
-   Space save(Space Space);
+    Space save(Space Space);
 
-   Space update(Space Space);
+    Space update(Space Space);
 }

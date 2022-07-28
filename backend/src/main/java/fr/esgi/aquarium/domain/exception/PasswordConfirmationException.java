@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class PasswordConfirmationException extends RuntimeException {
-    private final String password2Error;
+    private final String message;
 
-    public PasswordConfirmationException(String password2Error) {
-        this.password2Error = password2Error;
+    public PasswordConfirmationException(String message) {
+        this.message = message;
     }
 }

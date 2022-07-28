@@ -23,7 +23,7 @@ public class SpringDataSpaceRepository implements SpaceRepository {
     @Override
     public Space findById(Long typeId) {
         var Space = SpaceRepository.findById(typeId);
-        if(Space.isEmpty()){
+        if (Space.isEmpty()) {
             throw new EntityNotFoundException();
         }
         return mapper.toModel(Space.get());
@@ -37,7 +37,7 @@ public class SpringDataSpaceRepository implements SpaceRepository {
     @Override
     public Space findByName(String name) {
         var Space = SpaceRepository.findByName(name);
-        if(Space.isEmpty()){
+        if (Space.isEmpty()) {
             throw new EntityNotFoundException();
         }
         return mapper.toModel(Space.get());
@@ -52,7 +52,7 @@ public class SpringDataSpaceRepository implements SpaceRepository {
 
     @Override
     public Space save(Space Space) {
-        if(SpaceRepository.findByName(Space.getName()).isPresent()){
+        if (SpaceRepository.findByName(Space.getName()).isPresent()) {
             throw new AquariumException(ExceptionCode.ENTITY_CREATION_ERROR);
         }
         return mapper.toModel(SpaceRepository.saveAndFlush(mapper.toEntity(Space)));
@@ -60,7 +60,7 @@ public class SpringDataSpaceRepository implements SpaceRepository {
 
     @Override
     public Space update(Space Space) {
-        if(SpaceRepository.findById(Space.getId()).isEmpty()){
+        if (SpaceRepository.findById(Space.getId()).isEmpty()) {
             throw new AquariumException(ExceptionCode.MODIFICATION_IMPOSSIBLE);
         }
         return mapper.toModel(SpaceRepository.saveAndFlush(mapper.toEntity(Space)));

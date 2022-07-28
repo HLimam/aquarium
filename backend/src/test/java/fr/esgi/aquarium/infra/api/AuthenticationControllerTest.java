@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 @Sql(value = {"/sql/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/sql/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class AuthenticationControllerTest {
@@ -67,8 +67,8 @@ public class AuthenticationControllerTest {
         mockMvc.perform(post(URL_AUTH_LOGIN)
                 .content(mapper.writeValueAsString(authenticationRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isForbidden())
-                .andExpect(jsonPath("$", is("Incorrect password or email")));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("L'email et/ou le mot de passe sont incorrects.")));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class AuthenticationControllerTest {
                 .content(mapper.writeValueAsString(passwordResetRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$", is("Email not found")));
+                .andExpect(jsonPath("$.message", is("L'email et/ou le mot de passe sont incorrects.")));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class AuthenticationControllerTest {
                 .content(mapper.writeValueAsString(passwordResetRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.passwordError", is("Passwords do not match.")));
+                .andExpect(jsonPath("$.message", is("Passwords do not match.")));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class AuthenticationControllerTest {
                 .content(mapper.writeValueAsString(passwordResetRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.password2Error", is("Password confirmation cannot be empty.")));
+                .andExpect(jsonPath("$.message", is("Password confirmation cannot be empty.")));
     }
 
     @Test
@@ -139,7 +139,7 @@ public class AuthenticationControllerTest {
         requestDto.setPassword(USER_PASSWORD);
         requestDto.setPassword2(USER_PASSWORD);
 
-        mockMvc.perform(put(URL_AUTH_BASIC + "/edit/password")
+        mockMvc.perform(put(URL_PASSWORD_UPDATE)
                 .content(mapper.writeValueAsString(requestDto))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -153,11 +153,11 @@ public class AuthenticationControllerTest {
         requestDto.setPassword(USER_PASSWORD);
         requestDto.setPassword2("testpassword");
 
-        mockMvc.perform(put(URL_AUTH_BASIC + "/edit/password")
+        mockMvc.perform(put(URL_PASSWORD_UPDATE)
                 .content(mapper.writeValueAsString(requestDto))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.passwordError", is("Passwords do not match.")));
+                .andExpect(jsonPath("$.message", is("Passwords do not match.")));
     }
 
     @Test

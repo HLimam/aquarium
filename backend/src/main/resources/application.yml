@@ -1,0 +1,65 @@
+server:
+  port: ${SERVER_PORT}
+hostname: ${HOSTNAME}
+jwt:
+  header: Authorization
+  expiration: '604800'
+  secret: ${JWT_SECRET}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USER}
+    url: jdbc:postgresql://${DATABASE_URL}
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: update
+      disableConnectionTracking: 'true'
+      format_sql: 'false'
+      show_sql: 'false'
+      type: all
+      use_sql_comments: 'false'
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    port: '465'
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    protocol: smtps
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            client-id: ${GITHUB_CLIENT_ID}
+            scope: user:email,read:user
+
+  servlet:
+    multipart:
+      enabled: 'true'
+      max-file-size: 5MB
+      max-request-size: 10MB
+      file-size-threshold: 2MB
+mail:
+  debug: 'false'
+logging:
+  level:
+    fr:
+      esgi:
+        app:
+          fr:
+            esgi:
+              app:
+                controller: debug
+recaptcha:
+  url: ${RECAPTCHA_URL}
+  secret: ${RECAPTCHA_SECRET}

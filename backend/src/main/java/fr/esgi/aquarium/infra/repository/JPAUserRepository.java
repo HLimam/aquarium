@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface JPAUserRepository extends JpaRepository<UserEntity,Long> {
+public interface JPAUserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findAllByOrderByIdAsc();
 
     UserEntity findByEmail(String email);

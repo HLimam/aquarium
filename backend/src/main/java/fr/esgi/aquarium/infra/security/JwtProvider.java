@@ -21,7 +21,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtProvider {
 
-    @Qualifier("userDetailsServiceImpl") @Lazy
+    @Qualifier("userDetailsServiceImpl")
+    @Lazy
     private final UserDetailsService userDetailsService;
 
     @Value("${jwt.header}")

@@ -28,7 +28,7 @@ public class User {
     private String activationCode;
     private String passwordResetCode;
     private boolean active;
-    private LocalDate    date;
+    private LocalDate date;
     private AuthProvider provider;
-    private Set<Role>    roles;
+    private Set<Role> roles;
 }

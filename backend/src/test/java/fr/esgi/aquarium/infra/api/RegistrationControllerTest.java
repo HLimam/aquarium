@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 @Sql(value = {"/sql/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/sql/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class RegistrationControllerTest {
@@ -68,7 +68,7 @@ public class RegistrationControllerTest {
                 .content(mapper.writeValueAsString(registrationRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.passwordError", is("Passwords do not match.")));
+                .andExpect(jsonPath("$.message", is("Passwords do not match.")));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class RegistrationControllerTest {
                 .content(mapper.writeValueAsString(registrationRequest))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.emailError").value("Email is already used."));
+                .andExpect(jsonPath("$.message").value("Email is already used."));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class RegistrationControllerTest {
     @Test
     public void activateEmailCode_ShouldNotFoundActivationCode() throws Exception {
         mockMvc.perform(get(URL_REGISTRATION_ACTIVATE, "123"))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$", is("Activation code not found.")));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("Activation code not found")));
     }
 }

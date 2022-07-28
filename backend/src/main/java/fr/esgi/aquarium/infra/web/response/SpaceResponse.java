@@ -12,10 +12,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class SpaceResponse {
-    private Long   id;
-    private String   name;
-    private String   description;
-    private Integer   capacity;
+    private Long id;
+    private String name;
+    private String description;
+    private Integer capacity;
     private LocalDate openingTime;
     private LocalDate closingTime;
     private Boolean disabledAccess;

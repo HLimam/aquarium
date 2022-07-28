@@ -2,21 +2,26 @@ package fr.esgi.aquarium.domain.service;
 
 import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.domain.repository.UserRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+
     public User findUserById(Long userId) {
         return userRepository.findById(userId);
     }
+
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
     public List<User> findAllUsers() {
         return userRepository.findAllByOrderByIdAsc();
     }
+
     public User updateProfile(String email, User user) {
         User userFromDb = userRepository.findByEmail(email);
         userFromDb.setFirstName(user.getFirstName());
@@ -25,7 +30,7 @@ public class UserService {
         userFromDb.setAddress(user.getAddress());
         userFromDb.setPhoneNumber(user.getPhoneNumber());
         userFromDb.setPostIndex(user.getPostIndex());
-        userRepository.save(userFromDb);
+        userFromDb = userRepository.update(userFromDb);
         return userFromDb;
     }
 

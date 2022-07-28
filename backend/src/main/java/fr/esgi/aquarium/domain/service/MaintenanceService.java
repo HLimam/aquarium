@@ -1,13 +1,12 @@
-package fr.esgi.aquarium.infra.service;
+package fr.esgi.aquarium.domain.service;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
 import fr.esgi.aquarium.domain.repository.MaintenanceRepository;
+import lombok.RequiredArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
 public class MaintenanceService {
 

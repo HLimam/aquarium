@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class SpaceMapper {
     private final ModelMapper modelMapper;
+
     public SpaceEntity toEntity(Space Space) {
-        return modelMapper.map(Space,SpaceEntity.class);
+        return modelMapper.map(Space, SpaceEntity.class);
     }
 
-    public  Space toModel(SpaceEntity entity)  {
-        return modelMapper.map(entity,Space.class);
+    public Space toModel(SpaceEntity entity) {
+        return modelMapper.map(entity, Space.class);
     }
 }

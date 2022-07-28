@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class CaptchaException extends RuntimeException {
-    private final String captchaError;
+    private final String message;
 
-    public CaptchaException(String captchaError) {
-        this.captchaError = captchaError;
+    public CaptchaException(String message) {
+        this.message = message;
     }
 }

@@ -1,7 +1,6 @@
 package fr.esgi.aquarium.infra.repository;
 
 import fr.esgi.aquarium.domain.exception.AquariumException;
-import fr.esgi.aquarium.domain.exception.EntityNotFoundException;
 import fr.esgi.aquarium.domain.exception.ExceptionCode;
 import fr.esgi.aquarium.domain.model.User;
 import fr.esgi.aquarium.domain.repository.UserRepository;
@@ -18,25 +17,19 @@ import java.util.stream.Collectors;
 public class SpringDataUserRepository implements UserRepository {
 
     private final JPAUserRepository userRepository;
-    private final UserMapper        mapper;
+    private final UserMapper mapper;
 
 
     @Override
     public User findById(Long userId) {
         var user = userRepository.findById(userId);
-        if(user.isEmpty()){
-            throw new EntityNotFoundException();
-        }
-        return mapper.toModel(user.get());
+        return user.isPresent() ? mapper.toModel(user.get()) : null;
     }
 
     @Override
     public User findByEmail(String email) {
         var user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new EntityNotFoundException();
-        }
-        return mapper.toModel(user);
+        return user != null ? mapper.toModel(user) : null;
     }
 
     @Override
@@ -48,7 +41,15 @@ public class SpringDataUserRepository implements UserRepository {
 
     @Override
     public User save(User userFromDb) {
-        if(userRepository.findByEmail(userFromDb.getEmail()) != null){
+        if (userRepository.findByEmail(userFromDb.getEmail()) != null) {
+            throw new AquariumException(ExceptionCode.ENTITY_CREATION_ERROR);
+        }
+        return mapper.toModel(userRepository.saveAndFlush(mapper.toEntity(userFromDb)));
+    }
+
+    @Override
+    public User update(User userFromDb) {
+        if (userRepository.findByEmail(userFromDb.getEmail()) == null) {
             throw new AquariumException(ExceptionCode.ENTITY_CREATION_ERROR);
         }
         return mapper.toModel(userRepository.saveAndFlush(mapper.toEntity(userFromDb)));
@@ -61,6 +62,7 @@ public class SpringDataUserRepository implements UserRepository {
 
     @Override
     public User findByActivationCode(String code) {
-        return mapper.toModel(userRepository.findByActivationCode(code));
+        var user = userRepository.findByActivationCode(code);
+        return user != null ? mapper.toModel(userRepository.findByActivationCode(code)) : null;
     }
 }

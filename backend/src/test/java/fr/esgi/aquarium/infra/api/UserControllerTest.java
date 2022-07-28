@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/application.properties")
 @Sql(value = {"/sql/create-user-before.sql"},
         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/sql/create-user-after.sql"},
@@ -70,6 +70,7 @@ public class UserControllerTest {
         UserRequest userRequest = new UserRequest();
         userRequest.setFirstName(USER2_NAME);
         userRequest.setLastName(USER2_NAME);
+        userRequest.setEmail(USER_EMAIL);
 
         mockMvc.perform(put(URL_USERS_BASIC + "/edit")
                 .content(mapper.writeValueAsString(userRequest))

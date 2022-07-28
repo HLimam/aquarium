@@ -1,6 +1,7 @@
 package fr.esgi.aquarium.domain.repository;
 
 import fr.esgi.aquarium.domain.model.Maintenance;
+
 import java.util.List;
 
 public interface MaintenanceRepository {
