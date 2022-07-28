@@ -23,7 +23,7 @@ create_iam_policy:
 	aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://role/iam_policy.json
 
 create_service_account:
-	eksctl create iamserviceaccount --cluster=aquarium-cluster --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::XXXXXXXXXX:policy/AWSLoadBalancerControllerIAMPolicy --override-existing-serviceaccounts --approve
+	eksctl create iamserviceaccount --cluster=aquarium-cluster --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::444417612460:policy/AWSLoadBalancerControllerIAMPolicy --override-existing-serviceaccounts --approve
 
 add_graphical_ref_eks_to_helm:
 	helm repo add eks https://aws.github.io/eks-charts
@@ -32,7 +32,7 @@ install_TargetGroupBinding:
 	kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
 
 install_graphical_helm:
-	helm install aws-load-balancer-controller eks/aws-load-balancer-controller --set clusterName=aquarium-cluster --set serviceAccount.create=false --set region=eu-west-1 --set vpcId=vpc-XXXXXXXX --set serviceAccount.name=aws-load-balancer-controller -n kube-system
+	helm install aws-load-balancer-controller eks/aws-load-balancer-controller --set clusterName=aquarium-cluster --set serviceAccount.create=false --set region=eu-west-1 --set vpcId=vpc-0740a3d88f122a6da --set serviceAccount.name=aws-load-balancer-controller -n kube-system
 
 deploy_ingress_controller:
 	kubectl apply -f role/v2_4_2_full.yaml
